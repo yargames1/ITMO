@@ -19,28 +19,38 @@ public class Main {
 		}
 		// Пункт 3
 		double[][] w = new double[18][18];// Создать двумерный массив w размером 18x18.
-		List<Integer> list = List.of(3, 5, 6, 8, 9, 10, 12, 15, 20);
 		for (int i = 0; i<=17; i++) { //  Вычислить его элементы по следующей формуле
 			for (int j = 0; j<= 17; j++) {
-				if (n[i] == 4) { // если n[i] = 4
-					w[i][j] = Math.pow( Math.pow( ((1-x[j]) / x[j]), x[j]) + 2  / Math.asin( (x[j]+4)/16 ) , 3);
-				}
-				else if (list.contains(n[i])) { // если n[i] ∈ {3, 5, 6, 8, 9, 10, 12, 15, 20}
-					w[i][j] = Math.pow( Math.asin( Math.pow( (x[j]+4)/16 ,2) ) / 0.25f , 2);
-				}
-				else { // для остальных значений
-					w[i][j] = Math.tan(Math.pow( 1/3 * Math.pow(x[j], (x[j]-0.5f)/x[j] ) ,2))/2;
-				}
+				w[i][j] = gen_new_el(n[i], x[j]);
 			}
 		}
 		// Пункт 4
-		for (int i = 0; i<=17; i++) {
-			for (int j = 0; j<=17; j++) {
-				System.out.printf(" %.3f ", w[i][j]); // Напечатать полученный в результате массив в формате с тремя знаками после запятой.
-			}
-		}
+		print_answer(w);
 		
 	}
 	
-
+	
+	static double gen_new_el(int n, double x) { // Вычисление очередного элемента двумерного массива должно быть реализовано в виде отдельного статического метода.
+		List<Integer> list = List.of(3, 5, 6, 8, 9, 10, 12, 15, 20);
+		if (n == 4) { // если n[i] = 4
+			return Math.pow( Math.pow( ((1-x) / x), x) + 2  / Math.asin( (x+4)/16 ) , 3);
+		}
+		else if (list.contains(n)) { // если n[i] ∈ {3, 5, 6, 8, 9, 10, 12, 15, 20}
+			return Math.pow( Math.asin( Math.pow( (x+4)/16 ,2) ) / 0.25f , 2);
+		}
+		else { // для остальных значений
+			return Math.tan(Math.pow( 1/3 * Math.pow(x, (x-0.5f)/x ) ,2))/2;
+		}
+	}
+	
+	
+	static void print_answer(double[][] w) { // Вывод матрицы реализовать в виде отдельного статического метода.
+		for (int i = 0; i<=17; i++) {
+			for (int j = 0; j<=17; j++) {
+				System.out.printf("| %9.3f |", w[i][j]); // Напечатать полученный в результате массив в формате с тремя знаками после запятой.
+			}
+		}
+	}
+	
+	
 }
