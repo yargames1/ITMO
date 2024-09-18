@@ -49,7 +49,7 @@ public class Main {
 			for (int j = 0; j<=17; j++) {
 				System.out.printf("| %9.3f |", w[i][j]); // Напечатать полученный в результате массив в формате с тремя знаками после запятой.
 			}
-			System.out.println("/n");
+			System.out.print("\n");
 		}
 	}
 	
