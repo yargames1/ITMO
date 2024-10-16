@@ -1,0 +1,10 @@
+# !/bin/bash
+chmod -R 777 lab0
+cd lab0
+ln -s glameow0 Copy_16
+cat > glameow0/hoothootjoltik < joltik5
+cp joltik5 geodude4/weavile
+cp -r glameow0 geodude4/froslass
+cat glameow0/cyndaquil pidgeotto7/escavalier > palpitoad2_61
+ln palpitoad2 pidgeotto7/escavalierpalpitoad
+ln -s ../joltik5 glameow0/cyndaquiljoltik

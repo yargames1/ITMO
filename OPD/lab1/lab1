@@ -1,0 +1,31 @@
+# !/bin/bash
+mkdir lab0
+cd lab0
+mkdir geodude4
+cd geodude4
+mkdir weavile jigglypuff froslass
+cd ..
+mkdir glameow0
+cd glameow0
+cat > hoothoot << Fin
+stack=4 sef=6 spd=5
+Fin
+echo Тип диеты > cyndaquil
+mkdir cinccino vibrava wigglytuff
+cd ..
+cat > joltik5 << Fin
+Живет	Cave Forest
+Fin
+cat > palpitoad2 << Fin
+Тип покемона	Water
+Ground
+Fin
+mkdir -p pidgeotto7/horsea pidgeotto7/cottonee
+cd pidgeotto7
+cat > escavalier << Fin
+Ходы	Dug Bite Giga Drain Iron Defense Knock Off
+Sleep Talk Snore
+Fin
+cd ..
+echo satk=6 sdef=3 spd=5 > shuppet1
+

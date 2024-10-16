@@ -1,0 +1,14 @@
+# !/bin/bash
+cd lab0
+chmod -R 777 palpitoad2
+rm palpitoad2
+chmod -R 777 glameow0/hoothoot
+rm glameow0/hoothoot
+chmod -R 777 Copy_*
+rm Copy_*
+chmod -R 777 pidgeotto7/escavalierpalpito*
+rm pidgeotto7/escavalierpalpito*
+chmod -R 777 pidgeotto7
+rm -r  pidgeotto7
+chmod -R 777 glameow0/wigglytuff
+rmdir glameow0/wigglytuff

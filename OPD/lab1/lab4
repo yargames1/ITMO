@@ -1,0 +1,16 @@
+# !/bin/bash
+cd lab0
+echo _1
+wc -l pidgeotto7/* 2>&1 | sort -n
+cd ..
+echo _2
+ls -Rc lab0 | grep 'va' | grep -v 'lab0/'| tail -n 2
+cd lab0
+echo _3
+cat -n palpitoad2 | grep "ate" # sde не было
+echo _4
+cat -n glameow0/hoothoot glameow0/cyndaquil 2>&1 | grep "5$" # 1 на 5, 2 на ы заканчиваются, е нет
+echo _5
+cat 2>/dev/null -n *r */*r | sort -r # а не было
+echo _6
+cat -n pidgeotto7/* 2>/dev/null | grep "e$"

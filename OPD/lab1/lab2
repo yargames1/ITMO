@@ -1,0 +1,19 @@
+# !/bin/bash
+cd lab0
+chmod 361 geodude4
+chmod 335 geodude4/weavile
+chmod u=rx,g=x,o=wx geodude4/jigglypuff
+chmod u=wx,g=x,o=w geodude4/froslass
+chmod ugo+rwx glameow0
+chmod 404 glameow0/hoothoot
+chmod 361 glameow0/cinccino
+chmod 512 glameow0/vibrava
+chmod 004 glameow0/cyndaquil
+chmod 751 glameow0/wigglytuff
+chmod u-wrx,g=r,o=r joltik5
+chmod 640 palpitoad2
+chmod u=rwx,g=rx,o=w pidgeotto7
+chmod 444 pidgeotto7/escavalier
+chmod 512 pidgeotto7/horsea
+chmod u=wx,g=rwx,o=rx pidgeotto7/cottonee
+chmod u=r,g-wrx,o=r shuppet1
