@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<all>
+	<timetable type="dict">
+		<subject1 type="dict">
+			<day type="str">Пятница</day>
+			<time type="str">08:20-09:50</time>
+			<name type="str">Линейная алгебра</name>
+			<teacher type="str">Шаврин Андрей Андреевич</teacher>
+			<week type="str">четная</week>
+			<location type="str">ул.Ломоносова, д.9, лит. Б</location>
+			<room type="str">Ауд. 4307</room>
+			<format type="str">Очный</format>
+		</subject1>
+		<subject2 type="dict">
+			<day type="str">Пятница</day>
+			<time type="str">11:40-13:10</time>
+			<name type="str">Английский язык B1.1</name>
+			<teacher type="str">Филатов Андрей Сергеевич</teacher>
+			<week type="str">четная</week>
+			<location type="str">ул.Ломоносова, д.9, лит. Е</location>
+			<room type="str">Ауд. 3212</room>
+			<format type="str">Очный</format>
+		</subject2>
+		<subject3 type="dict">
+			<day type="str">Пятница</day>
+			<time type="str">13:30-15:00</time>
+			<name type="str">Английский язык B1.1</name>
+			<teacher type="str">Филатов Андрей Сергеевич</teacher>
+			<week type="str">четная</week>
+			<location type="str">ул.Ломоносова, д.9, лит. Е</location>
+			<room type="str">Ауд. 3212</room>
+			<format type="str">Очный</format>
+		</subject3>
+		<subject4 type="dict">
+			<day type="str">Пятница</day>
+			<time type="str">17:00-18:30</time>
+			<name type="str">Программирование</name>
+			<teacher type="str">Данилов Павел Юрьевич</teacher>
+			<week type="str">четная</week>
+			<location type="str">Кронверкский пр., д.49, лит.А</location>
+			<room type="str">Ауд. 2117</room>
+			<format type="str">Очный</format>
+		</subject4>
+		<subject5 type="dict">
+			<day type="str">Пятница</day>
+			<time type="str">18:40-20:10</time>
+			<name type="str">Программирование</name>
+			<teacher type="str">Данилов Павел Юрьевич</teacher>
+			<week type="str">четная</week>
+			<location type="str">Кронверкский пр., д.49, лит.А</location>
+			<room type="str">Ауд. 2117</room>
+			<format type="str">Очный</format>
+		</subject5>
+	</timetable>
+</all>
