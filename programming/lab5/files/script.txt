@@ -1,0 +1,14 @@
+update 2
+yayay
+3 4
+24
+56
+EASY
+ret
+2007-12-03T10:15+01:00[Europe/Paris]
+20
+2
+1 4 5
+show
+execute_script script.txt
+exit

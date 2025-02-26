@@ -1,0 +1,5 @@
+key,id,name,cordX,cordY,creationDate,minimalPoint,personalQualitiesMinimum,difficulty,name,birthday,height,weight,locX,locY,locZ
+Help,1,Test,1,0,2006-04-13,60,90,NORMAL,A,2023-02-08T16:30+03:00[Europe/Moscow],167.0,61.0,100.0,10.0,3.0
+1024,2,Test,2,0,2006-04-13,60,90,NORMAL,B,2023-02-08T16:30+03:00[Europe/Moscow],167.0,61.0,100.0,10.0,3.0
+abba,3,Test,3,0,2006-04-13,60,90,NORMAL,D,2023-02-08T16:30+03:00[Europe/Moscow],167.0,61.0,100.0,10.0,3.0
+Abba,4,Test,4,0,2006-04-13,60,90,NORMAL,C,2023-02-08T16:30+03:00[Europe/Moscow],167.0,61.0,100.0,10.0,3.0
