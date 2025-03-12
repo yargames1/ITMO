@@ -21,7 +21,7 @@ class InsertCommand: Command {
             else{println("Данный ключ уже используется")}
         }
         else if (auto){
-            if (tokens.size == 14){
+            if (tokens.size == 16){
                 try {
                     LabWorkCollection.collection.put(tokens[0], LabWorkCollection.autoNewLab(null, tokens.drop(1)))
                 }

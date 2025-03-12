@@ -13,6 +13,7 @@ object Main {
     fun main(args: Array<String>) {
         LabWorkCollection.collection = DataManager.load()
         while (true) {
+            print("> ")
             CommandManager.getCommand(readln())
         }
     }

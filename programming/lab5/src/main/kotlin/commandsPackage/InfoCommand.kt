@@ -14,7 +14,7 @@ class InfoCommand: Command {
     override fun execute(tokens: List<String>, auto: Boolean) {
         if (tokens.isEmpty()) {
             println(
-                "тип - HashMap, дата инициализации - \$будет потом, " + // дописать дату инициализации + еще что-нибудь
+                "тип - HashMap, дата инициализации - ${LabWorkCollection.inicializationDate} " + // дописать дату инициализации + еще что-нибудь
                         "количество элементов - ${LabWorkCollection.collection.size}"
             )
         }

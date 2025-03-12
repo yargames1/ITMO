@@ -15,16 +15,16 @@ class ExecuteScriptCommand: Command {
     override fun execute(tokens: List<String>, auto: Boolean) {
         try {
             val currentFile = tokens[0]
-            val path = Path("files\\${tokens[0]}")
+            val path = Path("files", currentFile)
             var newTokens = ""
             var newCommand = ""
             for (line in path.readLines()){
                 val readTokens = line.split(" ")
                 if (readTokens[0] in CommandRegistry.commands.keys){
-                    println("Выполняется команда $newCommand $newTokens".trim())
+                    if (newCommand.isNotEmpty()){println("Выполняется команда $newCommand $newTokens".trim())}
                     if ((currentFile !in newTokens) or (newCommand != "execute_script") ){CommandManager.autoGetCommand("$newCommand $newTokens".trim())}
                     else{ println("команда по запуску файла не будет выполнена, так как он уже открыт") }
-                    newCommand = readTokens[0].toString()
+                    newCommand = readTokens[0]
                     newTokens = readTokens.drop(1).joinToString(separator = " ")
                 }
                 else{
