@@ -12,7 +12,7 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         LabWorkCollection.collection = DataManager.load()
-        while (true) {
+        while (!FlagController.getFlag()) {
             print("> ")
             CommandManager.getCommand(readln())
         }

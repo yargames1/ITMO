@@ -1,5 +1,6 @@
 package commandsPackage
 
+import FlagController
 import kotlin.system.exitProcess
 /**
  * Класс, реализующий команду выхода из программы.
@@ -13,7 +14,7 @@ class ExitCommand: Command {
      */
     override fun execute(tokens: List<String>, auto: Boolean) {
         println("Выполняется выход из программы")
-        exitProcess(0)
+       FlagController.turnOff()
     }
     /**
      * Возвращает описание команды.
