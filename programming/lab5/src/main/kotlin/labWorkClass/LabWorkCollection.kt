@@ -186,7 +186,7 @@ object LabWorkCollection {
      * @return Ключ элемента
      */
     fun getMinByNameKey(): String{
-        var names = mutableListOf<String>()
+        val names = mutableListOf<String>()
         for (key in collection.keys){
             names.add(collection.getValue(key).getName())
         }

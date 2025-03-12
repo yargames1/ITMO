@@ -1,7 +1,6 @@
 package commandsPackage
 
 import FlagController
-import kotlin.system.exitProcess
 /**
  * Класс, реализующий команду выхода из программы.
  */
