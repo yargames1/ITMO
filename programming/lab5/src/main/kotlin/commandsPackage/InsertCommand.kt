@@ -22,11 +22,15 @@ class InsertCommand: Command {
         }
         else if (auto){
             if (tokens.size == 16){
-                try {
-                    LabWorkCollection.collection.put(tokens[0], LabWorkCollection.autoNewLab(null, tokens.drop(1)))
+                if (tokens[0] !in  LabWorkCollection.collection.keys){
+                    try {
+                        LabWorkCollection.collection.put(tokens[0], LabWorkCollection.autoNewLab(null, tokens.drop(1)))
+                    } catch (e: Exception) {
+                        println("Произошла ошибка при создании нового элемента, проверьте аргументы команды")
+                    }
                 }
-                catch (e: Exception){
-                    println("Произошла ошибка при создании нового элемента, проверьте аргументы команды")
+                else{
+                    println("Указанный ключ уже используется, элемент не будет добавлен")
                 }
             }
             else{
