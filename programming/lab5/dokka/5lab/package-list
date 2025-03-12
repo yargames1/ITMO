@@ -104,6 +104,7 @@ $dokka.location:labWorkClass/LabWorkCollection/getKeyById/#kotlin.Int/PointingTo
 $dokka.location:labWorkClass/LabWorkCollection/getKeyByPQM/#kotlin.Long/PointingToDeclaration/5lab/labWorkClass/-lab-work-collection/get-key-by-p-q-m.html
 $dokka.location:labWorkClass/LabWorkCollection/getMaxId/#/PointingToDeclaration/5lab/labWorkClass/-lab-work-collection/get-max-id.html
 $dokka.location:labWorkClass/LabWorkCollection/getMinByNameKey/#/PointingToDeclaration/5lab/labWorkClass/-lab-work-collection/get-min-by-name-key.html
+$dokka.location:labWorkClass/LabWorkCollection/inicializationDate/#/PointingToDeclaration/5lab/labWorkClass/-lab-work-collection/inicialization-date.html
 $dokka.location:labWorkClass/LabWorkCollection/newLab/#kotlin.Int?/PointingToDeclaration/5lab/labWorkClass/-lab-work-collection/new-lab.html
 $dokka.location:labWorkClass/Location///PointingToDeclaration/5lab/labWorkClass/-location/index.html
 $dokka.location:labWorkClass/Location/Location/#kotlin.Double#kotlin.Float#kotlin.Double/PointingToDeclaration/5lab/labWorkClass/-location/-location.html
