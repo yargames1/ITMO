@@ -1,6 +1,8 @@
 package commandsPackage
 
+import FlagController
 import managersPackage.CommandManager
+import managersPackage.IOManager
 import kotlin.io.path.*
 /**
  * Класс, реализующий команду запуска из файла.
@@ -10,32 +12,25 @@ class ExecuteScriptCommand: Command {
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
-     * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         try {
             val currentFile = tokens[0]
             val path = Path("files", currentFile)
-            var newTokens = ""
-            var newCommand = ""
+            val list = mutableListOf<String>()
             for (line in path.readLines()){
-                val readTokens = line.split(" ")
-                if (readTokens[0] in CommandRegistry.commands.keys){
-                    if (newCommand.isNotEmpty()){println("Выполняется команда $newCommand $newTokens".trim())}
-                    if ((currentFile !in newTokens) or (newCommand != "execute_script") ){CommandManager.autoGetCommand("$newCommand $newTokens".trim())}
-                    else{ println("команда по запуску файла не будет выполнена, так как он уже открыт") }
-                    newCommand = readTokens[0]
-                    newTokens = readTokens.drop(1).joinToString(separator = " ")
-                }
-                else{
-                    newTokens += " "+readTokens.joinToString(separator = " ")
+                // отправка текста IoManager
+                if ((currentFile !in line) or ("execute_script" !in line) ) { // проверка на запуск самого себя
+                    list.add(line)
                 }
             }
-            CommandManager.autoGetCommand("$newCommand $newTokens".trim())
+            IOManager.addText(list)
+            FlagController.startAuto()
+            CommandManager.getCommand(IOManager.read())
         }
 
         catch (e: Exception){
-            println("Произошла ошибка при чтении файла")
+            IOManager.send("Произошла ошибка при чтении файла $e")
         }
     }
     /**

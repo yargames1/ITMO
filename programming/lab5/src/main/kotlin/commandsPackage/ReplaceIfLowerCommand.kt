@@ -1,11 +1,14 @@
 package commandsPackage
 
+import Generator
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду замены элемента по ключу, если он меньше старого
  */
 class ReplaceIfLowerCommand : Command{
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         /**
          * Выполняет команду с переданными аргументами.
          *
@@ -15,38 +18,25 @@ class ReplaceIfLowerCommand : Command{
         if (tokens.size == 1){
             val key = tokens[0]
             if (key in LabWorkCollection.collection.keys) {
-                val newLab = LabWorkCollection.newLab(null)
-                if (newLab < LabWorkCollection.collection.getValue(key)){
-                    LabWorkCollection.collection.replace(key, newLab)
-                    println("Данные заменены")
-                }
-                else{
-                    println("Данные не были заменены, значение оказалось больше или равно")
+                try {
+                    val newLab = Generator.newLab(null)
+                    if (newLab < LabWorkCollection.collection.getValue(key)){
+                        LabWorkCollection.collection.replace(key, newLab)
+                        IOManager.send("Данные заменены")
+                    }
+                    else{
+                        IOManager.send("Данные не были заменены, значение оказалось больше или равно")
+                    }
+                }catch (e: Exception){
+                    IOManager.send(e.message.toString())
                 }
             }
             else{
-                println("Элемента с таким ключем не существует")
+                IOManager.send("Элемента с таким ключем не существует")
             }
         }
-        else if (auto){
-            if (tokens.size == 14){
-                val key = tokens[0]
-                if (key in LabWorkCollection.collection.keys) {
-                    try {
-                        val newLab = LabWorkCollection.autoNewLab(null, tokens.drop(1))
-                        if (newLab < LabWorkCollection.collection.getValue(key)) {
-                            LabWorkCollection.collection.replace(key, newLab)
-                            println("Данные заменены")
-                        } else {
-                            println("Данные не были заменены, значение оказалось больше или равно")
-                        }
-                    }catch (e: Exception){
-                        println("Произошла ошибка при создании элемента для замены, проверьте аргументы команды")
-                    }
-                }
-            }
-        }
-        else {println("Введите команду верно - replace_if_lower key, где key - ключ элемента коллекции")}
+        else {
+            IOManager.send("Введите команду верно - replace_if_lower key, где key - ключ элемента коллекции")}
     }
     /**
      * Возвращает описание команды.

@@ -8,9 +8,8 @@ interface Command {
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
-     * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    fun execute(tokens: List<String>, auto: Boolean = false)
+    fun execute(tokens: List<String>)
     /**
      * Возвращает описание команды.
      *

@@ -1,6 +1,8 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду удаления элемента с определенным значением поля personalQualitiesMinimum
  */
@@ -11,18 +13,18 @@ class RemoveAnyByPersonalQualitiesMinimumCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if (tokens.size == 1){
             val key = LabWorkCollection.getKeyByPQM(tokens[0].toLong())
             if (key!="") {
                 LabWorkCollection.collection.remove(key)
-                println("Элемент успешно удален")
+                IOManager.send("Элемент успешно удален")
             }
             else{
-                println("Элемента с таким значением personalQualitiesMinimum не существует")
+                IOManager.send("Элемента с таким значением personalQualitiesMinimum не существует")
             }
         }
-        else {println("Введите команду верно - remove_any_by_personal_qualities_minimum personalQualitiesMinimum, где " +
+        else {IOManager.send("Введите команду верно - remove_any_by_personal_qualities_minimum personalQualitiesMinimum, где " +
                 "personalQualitiesMinimum - значение поля personalQualitiesMinimum")}
     }
     /**

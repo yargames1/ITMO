@@ -12,7 +12,7 @@ class SaveCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         DataManager.save(LabWorkCollection.collection)
     }
     /**

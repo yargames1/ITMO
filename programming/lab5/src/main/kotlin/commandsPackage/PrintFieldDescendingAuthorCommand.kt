@@ -1,6 +1,8 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду вывода значений полей author всех элементов в порядке убывания
  */
@@ -11,9 +13,9 @@ class PrintFieldDescendingAuthorCommand: Command{
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         LabWorkCollection.getDescendingAuthors().forEach { author ->
-            println(author)
+            IOManager.send(author.toString())
         }
     }
     /**

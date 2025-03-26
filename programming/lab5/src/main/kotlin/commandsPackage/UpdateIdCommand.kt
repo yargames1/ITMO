@@ -1,6 +1,9 @@
 package commandsPackage
 
+import Generator
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду обновления объекта по id
  */
@@ -11,35 +14,25 @@ class UpdateIdCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if ((tokens.size == 1) and (tokens[0].toIntOrNull() != null)){
             val id = tokens[0].toInt()
             val key = LabWorkCollection.getKeyById(id)
             if (key!="") {
-                LabWorkCollection.collection.replace(key, LabWorkCollection.newLab(id))
-                println("Элемент успешно обновлен")
-            }
-            else{
-                println("Элемента с таким значением id не существует")
-            }
-        }
-        else if (auto){
-            val id = tokens[0].toInt()
-            val key = LabWorkCollection.getKeyById(id)
-            if (key!="") {
                 try {
-                    LabWorkCollection.collection.replace(key, LabWorkCollection.autoNewLab(id, tokens.drop(1)))
-                    println("Элемент успешно обновлен")
-                }
-                catch (e: Exception){
-                    println("Произошла ошибка при обновлении элемента, проверьте аргументы команды")
+                    LabWorkCollection.collection.replace(key, Generator.newLab(id))
+                    IOManager.send("Элемент успешно обновлен")
+                }catch (e: Exception){
+                    IOManager.send(e.message.toString())
                 }
             }
             else{
-                println("Элемента с таким значением id не существует")
+                IOManager.send("Элемента с таким значением id не существует")
             }
         }
-        else {println("Введите команду верно - update id, где id - id элемента коллекции")}
+
+        else {
+            IOManager.send("Введите команду верно - update id, где id - id элемента коллекции")}
     }
     /**
      * Возвращает описание команды.

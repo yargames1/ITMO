@@ -12,9 +12,9 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         LabWorkCollection.collection = DataManager.load()
-        while (!FlagController.getFlag()) {
-            print("> ")
-            CommandManager.getCommand(readln())
+        while (!FlagController.getExitFlag()) {
+            if (!FlagController.getAutoFlag()){IOManager.newString()}
+            CommandManager.getCommand(IOManager.read())
         }
     }
 }

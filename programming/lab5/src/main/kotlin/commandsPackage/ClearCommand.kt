@@ -1,6 +1,7 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
 
 /**
  * Класс, реализующий команду очистки коллекции
@@ -13,13 +14,13 @@ class ClearCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
             LabWorkCollection.collection.clear()
-            println("Коллекция успешно очищена")
+            IOManager.send("Коллекция успешно очищена")
         }
         else{
-            println("Команда не должна иметь аргументов")
+            IOManager.send("Команда не должна иметь аргументов")
         }
     }
     /**

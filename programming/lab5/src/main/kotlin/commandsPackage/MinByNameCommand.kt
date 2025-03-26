@@ -1,6 +1,8 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду вывода объекта с минимальным значением поля name
  */
@@ -11,9 +13,9 @@ class MinByNameCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
-            println(LabWorkCollection.collection.getValue(LabWorkCollection.getMinByNameKey()))
+            IOManager.send(LabWorkCollection.collection.getValue(LabWorkCollection.getMinByNameKey()).toString())
         }
     }
     /**

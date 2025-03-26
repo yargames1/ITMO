@@ -1,6 +1,8 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду получения информации о коллекции.
  */
@@ -11,9 +13,9 @@ class InfoCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
-            println(
+            IOManager.send(
                 "тип - HashMap, дата инициализации - ${LabWorkCollection.inicializationDate} " + // дописать дату инициализации + еще что-нибудь
                         "количество элементов - ${LabWorkCollection.collection.size}"
             )

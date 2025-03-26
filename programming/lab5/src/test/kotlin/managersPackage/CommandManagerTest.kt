@@ -22,19 +22,4 @@ import org.junit.jupiter.api.Assertions.*
    verify { mockCommand.execute(listOf("arg1", "arg2")) }
    unmockkAll()
   }
-
-  @Test
-  fun `autoGetCommand should execute the correct command with auto flag`() {
-   // Мокаем команду и её выполнение
-   val mockCommand = mockk<Command>(relaxed = true)
-   mockkObject(CommandRegistry)
-   every { CommandRegistry.commands } returns mutableMapOf("test" to mockCommand)
-
-   // Вызов autoGetCommand
-   CommandManager.autoGetCommand("test arg1 arg2")
-
-   // Проверка, что execute был вызван с правильными аргументами и флагом auto
-   verify { mockCommand.execute(listOf("arg1", "arg2"), auto = true) }
-   unmockkAll()
-  }
  }

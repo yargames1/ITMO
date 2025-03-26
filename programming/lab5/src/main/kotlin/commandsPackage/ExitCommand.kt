@@ -1,6 +1,8 @@
 package commandsPackage
 
 import FlagController
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду выхода из программы.
  */
@@ -11,8 +13,8 @@ class ExitCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
-        println("Выполняется выход из программы")
+    override fun execute(tokens: List<String>) {
+        IOManager.send("Выполняется выход из программы")
        FlagController.turnOff()
     }
     /**

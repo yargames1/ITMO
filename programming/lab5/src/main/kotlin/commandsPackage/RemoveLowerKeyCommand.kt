@@ -1,12 +1,13 @@
 package commandsPackage
 
 import labWorkClass.LabWorkCollection
+import managersPackage.IOManager
 
 class RemoveLowerKeyCommand: Command {
     /**
      * Класс, реализующий команду удаления элементов, ключи которых меньше определенных
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         /**
          * Выполняет команду с переданными аргументами.
          *
@@ -20,13 +21,13 @@ class RemoveLowerKeyCommand: Command {
                         LabWorkCollection.collection.remove(key)
                     }
                 }
-                println("Удаление завершено")
+                IOManager.send("Удаление завершено")
             }
             else{
-                println("Элемента с таким ключем не существует")
+                IOManager.send("Элемента с таким ключем не существует")
             }
         }
-        else {println("Введите команду верно - remove_lower_key key, где key - ключ элемента коллекции")}
+        else {IOManager.send("Введите команду верно - remove_lower_key key, где key - ключ элемента коллекции")}
     }
     /**
      * Возвращает описание команды.

@@ -1,134 +1,29 @@
 package labWorkClass
 
+import managersPackage.IOManager
+
 object Validator {
-    fun coords(coord: String, auto: Boolean = false): List<Int> {
-            try {
-                val coordinates = coord.split(" ").map { it.toInt() }
-                if ((coordinates.size == 2) and (coordinates[1] <= 858)) {
-                    return coordinates
-                } else {
-                    println("Произошла ошибка при вводе данных, у должен быть не больше 858")
-                }
-            } catch (e: Exception) {
-                println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y")
-            }
-        if (!auto) {
-            while (true) {
-                try {
-                    print("> ")
-                    val newCoord = readln().split(" ").map { it.toInt() }
-                    if ((newCoord.size == 2) and (newCoord[1] <= 858)) {
-                        return newCoord
-                    } else {
-                        println("Произошла ошибка при вводе данных, у должен быть не больше 858")
-                    }
-                } catch (e: Exception) {
-                    println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y")
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+    fun coords(coord: String): Boolean {
+        val coordinates = coord.split(" ").mapNotNull { it.toIntOrNull() }
+        return coordinates.size == 2 && coordinates[1] <= 858
     }
-    fun longMoreThanZero(long: String, auto: Boolean = false):Long{
-        try {
-            if (long.toLong() > 0){
-                return long.toLong()
-            }
-            else{println("Произошла ошибка при вводе данных, число должно быть больше 0")}
-        }
-        catch (e: Exception){
-            println("Произошла ошибка при вводе данных, это должно быть число")
-        }
-        if (!auto) {
-            while (true) {
-                try {
-                    print("> ")
-                    val newLong = readln().toLong()
-                    if (newLong > 0) {
-                        return newLong
-                    } else {
-                        println("Произошла ошибка при вводе данных, у должен быть не больше 858")
-                    }
-                } catch (e: Exception) {
-                    println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y")
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun longMoreThanZero(long: String):Boolean{
+        return long.toLongOrNull()?.let { it > 0 } ?: false
     }
-    fun doubleMoreThanZero(double: String, auto: Boolean = false):Double{
-        try {
-            if (double.toDouble() > 0){
-                return double.toDouble()
-            }
-            else{println("Произошла ошибка при вводе данных, число должно быть больше 0")}
-        }
-        catch (e: Exception){
-            println("Произошла ошибка при вводе данных, это должно быть число")
-        }
-        if (!auto) {
-            while (true) {
-                try {
-                    print("> ")
-                    val newDouble = readln().toDouble()
-                    if (newDouble > 0) {
-                        return newDouble
-                    } else {
-                        println("Произошла ошибка при вводе данных, у должен быть не больше 858")
-                    }
-                } catch (e: Exception) {
-                    println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y")
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun doubleMoreThanZero(double: String):Boolean{
+        return double.toDoubleOrNull()?.let { it > 0 } ?: false
     }
-    fun enum(diff: String, auto: Boolean = false): Difficulty {
-        try {
-            val difficulty = Difficulty.valueOf(diff.uppercase())
-            return difficulty
-        }
-        catch (e: Exception){
-            println("Произошла ошибка при вводе данных, попробуйте снова")
-        }
-        if (!auto) {
-            while (true) {
-                try {
-                    print("> ")
-                    val newDifficulty = Difficulty.valueOf(readln().uppercase())
-                    return newDifficulty
-                } catch (e: Exception) {
-                    println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y")
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun enum(diff: String): Boolean {
+        return  Difficulty.values().any { it.name == diff.uppercase() }
     }
-    fun str(string: String, auto: Boolean = false):String{
-        if (string.trim() != ""){
-            return string
-        }
-        if (!auto) {
-            while (true) {
-                print("> ")
-                val newString = readln().trim()
-                if (newString != "") {
-                    return newString
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun str(string: String):Boolean {
+        return string.trim() != ""
     }
+
     private fun timePatternCheck(time: String): Boolean {
         val timePattern = """^\d{2}:\d{2}$""".toRegex()
 
@@ -138,16 +33,17 @@ object Validator {
                 if (minutes in 0..59) {
                     return true
                 } else {
-                    println("Неверное количество минут. Попробуйте снова.")
+                     IOManager.send("Неверное количество минут.")
                 }
             } else {
-                println("Неверное количество часов. Попробуйте снова.")
+                IOManager.send("Неверное количество часов.")
             }
         } else {
-            println("Неверный формат времени. Попробуйте снова.")
+            IOManager.send("Неверный формат времени.")
         }
         return false
     }
+
     private fun zonePatternCheck(time: String): Boolean {
         val timePattern = """^[+-]\d{2}:\d{2}$""".toRegex()
 
@@ -157,13 +53,13 @@ object Validator {
                 if (minutes in 0..59) {
                     return true
                 } else {
-                    println("Неверное количество минут. Попробуйте снова.")
+                    IOManager.send("Неверное количество минут.")
                 }
             } else {
-                println("Неверное количество часов. Попробуйте снова.")
+                IOManager.send("Неверное количество часов.")
             }
         } else {
-            println("Неверный формат времени. Попробуйте снова.")
+            IOManager.send("Неверный формат времени.")
         }
         return false
     }
@@ -177,96 +73,32 @@ object Validator {
                 if (day in 1..daysInMonth[month - 1]) {
                     return true
                 } else {
-                    println("Неверное количество дней в месяце. Попробуйте снова.")
+                    IOManager.send("Неверное количество дней в месяце.")
                 }
             } else {
-                println("Месяц должен быть в пределах от 01 до 12. Попробуйте снова.")
+                IOManager.send("Месяц должен быть в пределах от 01 до 12.")
             }
         } else {
-            println("Неверный формат даты. Попробуйте снова.")
+            IOManager.send("Неверный формат даты.")
         }
         return false
     }
-    fun date(date: String, auto: Boolean = false): String {
-        if (datePatternCheck(date)){
-            return date
-        }
-        if (!auto) {
-            while (true) {
-                print("> ")
-                val newDate = readln()
-                if (datePatternCheck(newDate)) {
-                    return newDate
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun date(date: String): Boolean {
+        return datePatternCheck(date)
     }
-    fun time(time: String, auto: Boolean = false): String {
-        if (timePatternCheck(time)){
-            return time
-        }
-        if (!auto) {
-            while (true) {
-                print("> ")
-                val newTime = readln()
-                if (timePatternCheck(newTime)) {
-                    return newTime
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun time(time: String): Boolean{
+        return timePatternCheck(time)
     }
-    fun zone(zone: String, auto: Boolean = false): String {
-        if (zonePatternCheck(zone)){
-            return zone
-        }
-        if (!auto) {
-            while (true) {
-                print("> ")
-                val newZone = readln()
-                if (zonePatternCheck(newZone)) {
-                    return newZone
-                }
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun zone(zone: String): Boolean {
+        return zonePatternCheck(zone)
     }
-    fun loc(loc: String, auto: Boolean = false): Location{
-        try {
-            val loc = loc.split(" ")
-            if (loc.size == 3){
-                val coord_X = loc[0].toDouble()
-                val coord_Y = loc[1].toFloat()
-                val coord_Z = loc[2].toDouble()
-                return Location(coord_X, coord_Y, coord_Z)
-            }
-            else{println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y z")}
-        }
-        catch (e: Exception){
-            println("Произошла ошибка при вводе данных, x - Double, y - Float, z - Double")
-        }
-        if(!auto){
-            while (true) {
-                print("> ")
-                val newLoc = readln().split(" ")
-                if (newLoc.size == 3){
-                    val coord_X = newLoc[0].toDouble()
-                    val coord_Y = newLoc[1].toFloat()
-                    val coord_Z = newLoc[2].toDouble()
-                    return Location(coord_X, coord_Y, coord_Z)
-                }
-                else{println("Произошла ошибка при вводе данных, напишите координаты еще раз в формате x y z")}
-            }
-        }
-        else{
-            throw Exception()
-        }
+
+    fun loc(loc: String): Boolean{
+        return ((loc.split(" ")[0].toDoubleOrNull()!=null) &&
+                (loc.split(" ")[1].toFloatOrNull()!=null)&&
+                (loc.split(" ")[2].toDoubleOrNull()!=null))
     }
 }

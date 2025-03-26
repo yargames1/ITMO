@@ -1,4 +1,7 @@
 package commandsPackage
+
+import managersPackage.IOManager
+
 /**
  * Класс, реализующий команду помощи.
  */
@@ -17,10 +20,10 @@ class HelpCommand: Command {
      * @param tokens Список, содержащий команду и её аргументы.
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
-    override fun execute(tokens: List<String>, auto: Boolean) {
+    override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
             for (c in CommandRegistry.commands.values) {
-                println(c.describe())
+                IOManager.send(c.describe())
             }
         }
     }
