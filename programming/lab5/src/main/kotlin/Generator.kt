@@ -1,10 +1,11 @@
 import labWorkClass.*
+import managersPackage.FlagManager
 import managersPackage.IOManager
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
 /**
- * Объект для генерации уникальных идентификаторов и дат.
+ * Объект для генерации новых значений и объектов.
  */
 object Generator {
     /**
@@ -31,7 +32,7 @@ object Generator {
      * @return Элемент коллекции
      */
     fun newLab(id: Int?): LabWork {
-        val auto = FlagController.getAutoFlag()
+        val auto = FlagManager.getAutoFlag()
         val newId = id ?: newId()
 
         fun readValidatedInput(prompt: String, validator: (String) -> Boolean, errorMessage: String, retryMessage: String): String {

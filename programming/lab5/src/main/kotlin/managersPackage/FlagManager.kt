@@ -1,7 +1,9 @@
+package managersPackage
+
 /**
  * Объект, хранящий и изменяющий флаг выхода.
  */
-object FlagController {
+object FlagManager {
     private var exitFlag = false
     private var autoFlag = false
     fun turnOff(){

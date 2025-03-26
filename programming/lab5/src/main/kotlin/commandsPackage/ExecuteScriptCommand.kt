@@ -1,6 +1,7 @@
 package commandsPackage
 
-import FlagController
+import labWorkClass.LabWorkCollection
+import managersPackage.FlagManager
 import managersPackage.CommandManager
 import managersPackage.IOManager
 import kotlin.io.path.*
@@ -9,23 +10,25 @@ import kotlin.io.path.*
  */
 class ExecuteScriptCommand: Command {
     /**
-     * Выполняет команду с переданными аргументами.
+     * Перенаправляет данные из файла IOManager.
      *
      * @param tokens Список, содержащий команду и её аргументы.
      */
     override fun execute(tokens: List<String>) {
         try {
             val currentFile = tokens[0]
+            LabWorkCollection.addFile(currentFile)
             val path = Path("files", currentFile)
             val list = mutableListOf<String>()
             for (line in path.readLines()){
                 // отправка текста IoManager
-                if ((currentFile !in line) or ("execute_script" !in line) ) { // проверка на запуск самого себя
+                if (line.split(" ").all{ it !in LabWorkCollection.getOpendFiles()}) { // проверка на запуск открытого файла
                     list.add(line)
                 }
+
             }
             IOManager.addText(list)
-            FlagController.startAuto()
+            FlagManager.startAuto()
             CommandManager.getCommand(IOManager.read())
         }
 

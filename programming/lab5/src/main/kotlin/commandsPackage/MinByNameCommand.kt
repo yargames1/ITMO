@@ -15,7 +15,7 @@ class MinByNameCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
-            IOManager.send(LabWorkCollection.collection.getValue(LabWorkCollection.getMinByNameKey()).toString())
+            IOManager.send(LabWorkCollection.getCollection().getValue(LabWorkCollection.getMinByNameKey()).toString())
         }
     }
     /**

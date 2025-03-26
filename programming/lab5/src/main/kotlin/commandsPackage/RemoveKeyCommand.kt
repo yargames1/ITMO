@@ -15,8 +15,8 @@ class RemoveKeyCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         if (tokens.size == 1){
-            if (tokens[0] in LabWorkCollection.collection.keys) {
-                LabWorkCollection.collection.remove(tokens[0])
+            if (tokens[0] in LabWorkCollection.getCollection().keys) {
+                LabWorkCollection.removeFromCollection(tokens[0])
                 IOManager.send("Элемент успешно удален")
             }
             else{

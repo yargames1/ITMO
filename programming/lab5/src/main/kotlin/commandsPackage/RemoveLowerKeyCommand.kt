@@ -15,10 +15,10 @@ class RemoveLowerKeyCommand: Command {
          * @param auto Флаг, указывающий, выполняется ли команда автоматически
          */
         if (tokens.size == 1){
-            if (tokens[0] in LabWorkCollection.collection.keys) {
-                for (key in LabWorkCollection.collection.keys.toList()){
+            if (tokens[0] in LabWorkCollection.getCollection().keys) {
+                for (key in LabWorkCollection.getCollection().keys.toList()){
                     if (key < tokens[0]){
-                        LabWorkCollection.collection.remove(key)
+                        LabWorkCollection.removeFromCollection(key)
                     }
                 }
                 IOManager.send("Удаление завершено")

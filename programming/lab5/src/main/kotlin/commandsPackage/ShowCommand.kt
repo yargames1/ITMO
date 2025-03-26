@@ -15,8 +15,8 @@ class ShowCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()){
-            for (key in LabWorkCollection.collection.keys){
-                IOManager.send("$key - ${LabWorkCollection.collection[key]}")
+            for (key in LabWorkCollection.getCollection().keys){
+                IOManager.send("$key - ${LabWorkCollection.getCollection()[key]}")
             }
         }
     }

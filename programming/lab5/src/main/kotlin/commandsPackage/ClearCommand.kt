@@ -16,7 +16,7 @@ class ClearCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
-            LabWorkCollection.collection.clear()
+            LabWorkCollection.clearConnection()
             IOManager.send("Коллекция успешно очищена")
         }
         else{

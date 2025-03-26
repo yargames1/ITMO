@@ -13,7 +13,7 @@ class SaveCommand: Command {
      * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
     override fun execute(tokens: List<String>) {
-        DataManager.save(LabWorkCollection.collection)
+        DataManager.save(LabWorkCollection.getCollection())
     }
     /**
      * Возвращает описание команды.

@@ -17,7 +17,7 @@ class RemoveAnyByPersonalQualitiesMinimumCommand: Command {
         if (tokens.size == 1){
             val key = LabWorkCollection.getKeyByPQM(tokens[0].toLong())
             if (key!="") {
-                LabWorkCollection.collection.remove(key)
+                LabWorkCollection.removeFromCollection(key)
                 IOManager.send("Элемент успешно удален")
             }
             else{

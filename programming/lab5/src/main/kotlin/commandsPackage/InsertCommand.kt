@@ -16,9 +16,9 @@ class InsertCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         if (tokens.size == 1){
-            if (tokens[0] !in LabWorkCollection.collection.keys){
+            if (tokens[0] !in LabWorkCollection.getCollection().keys){
                 try {
-                    LabWorkCollection.collection.put(tokens[0], Generator.newLab(null))
+                    LabWorkCollection.putInCollection(tokens[0], Generator.newLab(null))
                     IOManager.send("Новый элемент успешно создан")
                 }catch (e: Exception){
                     IOManager.send(e.message.toString())

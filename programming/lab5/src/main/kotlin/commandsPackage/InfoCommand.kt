@@ -16,8 +16,8 @@ class InfoCommand: Command {
     override fun execute(tokens: List<String>) {
         if (tokens.isEmpty()) {
             IOManager.send(
-                "тип - HashMap, дата инициализации - ${LabWorkCollection.inicializationDate} " + // дописать дату инициализации + еще что-нибудь
-                        "количество элементов - ${LabWorkCollection.collection.size}"
+                "тип - HashMap, дата инициализации - ${LabWorkCollection.getInicializationDate()} " + // дописать дату инициализации + еще что-нибудь
+                        "количество элементов - ${LabWorkCollection.getCollection().size}"
             )
         }
     }

@@ -1,7 +1,9 @@
 package labWorkClass
 
 import managersPackage.IOManager
-
+/**
+ * Объект для проверки типа данных.
+ */
 object Validator {
     fun coords(coord: String): Boolean {
         val coordinates = coord.split(" ").mapNotNull { it.toIntOrNull() }

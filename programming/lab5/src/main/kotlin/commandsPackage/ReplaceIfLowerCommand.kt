@@ -17,11 +17,11 @@ class ReplaceIfLowerCommand : Command{
          */
         if (tokens.size == 1){
             val key = tokens[0]
-            if (key in LabWorkCollection.collection.keys) {
+            if (key in LabWorkCollection.getCollection().keys) {
                 try {
                     val newLab = Generator.newLab(null)
-                    if (newLab < LabWorkCollection.collection.getValue(key)){
-                        LabWorkCollection.collection.replace(key, newLab)
+                    if (newLab < LabWorkCollection.getCollection().getValue(key)){
+                        LabWorkCollection.replaceInCollection(key, newLab)
                         IOManager.send("Данные заменены")
                     }
                     else{

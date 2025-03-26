@@ -20,7 +20,7 @@ class UpdateIdCommand: Command {
             val key = LabWorkCollection.getKeyById(id)
             if (key!="") {
                 try {
-                    LabWorkCollection.collection.replace(key, Generator.newLab(id))
+                    LabWorkCollection.replaceInCollection(key, Generator.newLab(id))
                     IOManager.send("Элемент успешно обновлен")
                 }catch (e: Exception){
                     IOManager.send(e.message.toString())

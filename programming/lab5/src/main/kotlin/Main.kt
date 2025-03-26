@@ -11,9 +11,9 @@ object Main {
      */
     @JvmStatic
     fun main(args: Array<String>) {
-        LabWorkCollection.collection = DataManager.load()
-        while (!FlagController.getExitFlag()) {
-            if (!FlagController.getAutoFlag()){IOManager.newString()}
+        LabWorkCollection.setCollection(DataManager.load())
+        while (!FlagManager.getExitFlag()) {
+            if (!FlagManager.getAutoFlag()){IOManager.newString()}
             CommandManager.getCommand(IOManager.read())
         }
     }

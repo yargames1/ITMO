@@ -1,6 +1,6 @@
 package commandsPackage
 
-import FlagController
+import managersPackage.FlagManager
 import managersPackage.IOManager
 
 /**
@@ -15,7 +15,7 @@ class ExitCommand: Command {
      */
     override fun execute(tokens: List<String>) {
         IOManager.send("Выполняется выход из программы")
-       FlagController.turnOff()
+       FlagManager.turnOff()
     }
     /**
      * Возвращает описание команды.
