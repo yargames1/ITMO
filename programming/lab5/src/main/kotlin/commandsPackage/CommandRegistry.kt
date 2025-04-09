@@ -8,6 +8,7 @@ object CommandRegistry {
      * Хеш-таблица доступных команд.
      * Ключ — строковое название команды, значение — объект, реализующий `Command`.
      */
+
     val commands = mutableMapOf(
         "help" to HelpCommand(),
         "info" to InfoCommand(),
