@@ -1,0 +1,146 @@
+апр. 23, 2025 6:07:41 PM Common.managersPackage.DataManager load
+INFO: Файл не найден: files/data.csv
+апр. 23, 2025 6:07:41 PM Common.managersPackage.DataManager load
+INFO: Программа будет запущена без исходных данных
+апр. 23, 2025 6:07:42 PM ServerMain main
+INFO: Сервер запущен на порту 65242
+апр. 23, 2025 6:07:59 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:61305
+апр. 23, 2025 6:08:13 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[info])
+апр. 23, 2025 6:08:13 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=тип - HashMap, дата инициализации - 2025-04-23 количество элементов - 0)
+апр. 23, 2025 6:08:16 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[3r4])
+апр. 23, 2025 6:08:16 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 6:08:19 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[help])
+апр. 23, 2025 6:08:19 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=help - выводит справку по доступным командам
+info - выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+show - выводит все элементы коллекции в строковом представлении
+insert key - добавляет новый элемент с заданным ключом
+update id - обновляет значение элемента коллекции, id которого равен заданному
+remove_key - удаляет элемент из коллекции по его ключу
+clear - очищает коллекцию
+exit - выход из программы (сохранение не происходит)
+replace_if_greater - заменяет значение по ключу, если оно больше старого
+replace_if_lower - заменяет значение по ключу, если оно меньше старого
+remove_lower_key key - удаляет из коллекции все элементы, ключ которых меньше, чем заданный
+remove_any_by_personal_qualities_minimum personalQualitiesMinimum - удаляет из коллекции один элемент, значение поля personalQualitiesMinimum которого эквивалентно заданному
+min_by_name - выводит любой объект из коллекции, значение поля name которого является минимальным
+print_field_descending_author - выводит значения поля author всех элементов в порядке убывания
+execute_script file_name - считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.Скрипт должен находиться в папке files)
+апр. 23, 2025 6:08:35 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[])
+апр. 23, 2025 6:08:35 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 6:10:04 PM ServerMain main
+WARNING: Ошибка: Connection reset
+апр. 23, 2025 6:10:04 PM Common.managersPackage.DataManager save
+INFO: Данные успешно записаны в файл data.csv
+апр. 23, 2025 6:10:11 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:61324
+апр. 23, 2025 6:10:14 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[info])
+апр. 23, 2025 6:10:14 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=тип - HashMap, дата инициализации - 2025-04-23 количество элементов - 0)
+апр. 23, 2025 6:10:21 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[help])
+апр. 23, 2025 6:10:21 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=help - выводит справку по доступным командам
+info - выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+show - выводит все элементы коллекции в строковом представлении
+insert key - добавляет новый элемент с заданным ключом
+update id - обновляет значение элемента коллекции, id которого равен заданному
+remove_key - удаляет элемент из коллекции по его ключу
+clear - очищает коллекцию
+exit - выход из программы (сохранение не происходит)
+replace_if_greater - заменяет значение по ключу, если оно больше старого
+replace_if_lower - заменяет значение по ключу, если оно меньше старого
+remove_lower_key key - удаляет из коллекции все элементы, ключ которых меньше, чем заданный
+remove_any_by_personal_qualities_minimum personalQualitiesMinimum - удаляет из коллекции один элемент, значение поля personalQualitiesMinimum которого эквивалентно заданному
+min_by_name - выводит любой объект из коллекции, значение поля name которого является минимальным
+print_field_descending_author - выводит значения поля author всех элементов в порядке убывания
+execute_script file_name - считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.Скрипт должен находиться в папке files)
+апр. 23, 2025 6:10:29 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[])
+апр. 23, 2025 6:10:29 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 6:10:51 PM ServerMain main
+WARNING: Ошибка: Connection reset
+апр. 23, 2025 6:10:51 PM Common.managersPackage.DataManager save
+INFO: Данные успешно записаны в файл data.csv
+апр. 23, 2025 6:10:56 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:61336
+апр. 23, 2025 6:11:07 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[])
+апр. 23, 2025 6:11:07 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 6:11:18 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[exit])
+апр. 23, 2025 6:11:18 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=Выполняется выход из программы)
+апр. 23, 2025 6:11:18 PM Common.managersPackage.DataManager save
+INFO: Данные успешно записаны в файл data.csv
+апр. 23, 2025 6:15:51 PM Server.managersPackage.DataManager load
+INFO: Данные загружены
+апр. 23, 2025 6:15:52 PM ServerMain main
+INFO: Сервер запущен на порту 65242
+апр. 23, 2025 6:16:09 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:61393
+апр. 23, 2025 6:16:31 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[jdjf])
+апр. 23, 2025 6:16:31 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 6:16:34 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[help])
+апр. 23, 2025 6:16:34 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=help - выводит справку по доступным командам
+info - выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+show - выводит все элементы коллекции в строковом представлении
+insert key - добавляет новый элемент с заданным ключом
+update id - обновляет значение элемента коллекции, id которого равен заданному
+remove_key - удаляет элемент из коллекции по его ключу
+clear - очищает коллекцию
+exit - выход из программы (сохранение не происходит)
+replace_if_greater - заменяет значение по ключу, если оно больше старого
+replace_if_lower - заменяет значение по ключу, если оно меньше старого
+remove_lower_key key - удаляет из коллекции все элементы, ключ которых меньше, чем заданный
+remove_any_by_personal_qualities_minimum personalQualitiesMinimum - удаляет из коллекции один элемент, значение поля personalQualitiesMinimum которого эквивалентно заданному
+min_by_name - выводит любой объект из коллекции, значение поля name которого является минимальным
+print_field_descending_author - выводит значения поля author всех элементов в порядке убывания
+execute_script file_name - считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.Скрипт должен находиться в папке files)
+апр. 23, 2025 6:16:36 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[info])
+апр. 23, 2025 6:16:36 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=тип - HashMap, дата инициализации - 2025-04-23 количество элементов - 0)
+апр. 23, 2025 6:17:07 PM ServerMain main
+WARNING: Ошибка: Connection reset
+апр. 23, 2025 6:17:07 PM Server.managersPackage.DataManager save
+INFO: Данные успешно записаны в файл data.csv
+апр. 23, 2025 6:17:33 PM Server.managersPackage.DataManager load
+INFO: Данные загружены
+апр. 23, 2025 6:17:33 PM ServerMain main
+INFO: Сервер запущен на порту 65242
+апр. 23, 2025 6:17:34 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:61420
+апр. 23, 2025 7:14:04 PM Server.managersPackage.DataManager load
+INFO: Данные загружены
+апр. 23, 2025 7:26:17 PM Server.managersPackage.DataManager load
+INFO: Данные загружены
+апр. 23, 2025 7:26:29 PM Server.managersPackage.DataManager load
+INFO: Данные загружены
+апр. 23, 2025 7:26:29 PM ServerMain main
+INFO: Сервер запущен на порту 65242
+апр. 23, 2025 7:26:35 PM ServerMain handleAccept
+INFO: Клиент подключился: /127.0.0.1:59640
+апр. 23, 2025 7:26:38 PM ServerMain handleRead
+INFO: Получен объект: Request(str=[sd])
+апр. 23, 2025 7:26:38 PM ServerMain handleWrite
+INFO: Отправлен ответ: Response(str=)
+апр. 23, 2025 7:26:52 PM ServerMain main
+WARNING: Ошибка: Connection reset
+апр. 23, 2025 7:26:52 PM Server.managersPackage.DataManager save
+INFO: Данные успешно записаны в файл data.csv
