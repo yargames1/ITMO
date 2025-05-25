@@ -14,7 +14,6 @@ class InsertCommand: Command {
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
-     * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
     override fun execute(tokens: List<String>, state: ClientState) {
         // Используем Stream API для проверки наличия ключа

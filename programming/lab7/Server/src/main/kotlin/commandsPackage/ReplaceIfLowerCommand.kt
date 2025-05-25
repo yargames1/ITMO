@@ -10,13 +10,13 @@ import Stage
  * Класс, реализующий команду замены элемента по ключу, если он меньше старого
  */
 class ReplaceIfLowerCommand : Command {
+    /**
+     * Выполняет команду с переданными аргументами.
+     *
+     * @param tokens Список, содержащий команду и её аргументы.
+     */
     override fun execute(tokens: List<String>, state: ClientState) {
-        /**
-         * Выполняет команду с переданными аргументами.
-         *
-         * @param tokens Список, содержащий команду и её аргументы.
-         * @param auto Флаг, указывающий, выполняется ли команда автоматически
-         */
+
         val key = tokens[0]
         if (key in LabWorkCollection.getCollection().keys) {
             try {

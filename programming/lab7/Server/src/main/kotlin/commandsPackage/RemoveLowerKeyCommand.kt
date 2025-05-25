@@ -14,7 +14,6 @@ class RemoveLowerKeyCommand: Command {
          * Выполняет команду с переданными аргументами.
          *
          * @param tokens Список, содержащий команду и её аргументы.
-         * @param auto Флаг, указывающий, выполняется ли команда автоматически
          */
         if (tokens.size == 1){
             if (tokens[0] in LabWorkCollection.getCollection().keys) {

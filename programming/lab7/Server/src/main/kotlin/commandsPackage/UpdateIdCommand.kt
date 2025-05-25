@@ -14,7 +14,6 @@ class UpdateIdCommand: Command {
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
-     * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
     override fun execute(tokens: List<String>, state: ClientState) {
         val id = tokens[0].toIntOrNull()

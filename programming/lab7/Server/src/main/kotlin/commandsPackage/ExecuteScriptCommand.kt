@@ -1,7 +1,6 @@
 package commandsPackage
 
 import ClientState
-import commandsPackage.Command
 
 /**
  * Класс, реализующий команду запуска из файла.

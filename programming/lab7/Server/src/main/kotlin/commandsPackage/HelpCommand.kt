@@ -3,8 +3,6 @@ package commandsPackage
 import ClientState
 import ServerOutput
 import Stage
-import commandsPackage.Command
-import commandsPackage.CommandRegistry
 
 /**
  * Класс, реализующий команду помощи.
@@ -22,7 +20,6 @@ class HelpCommand: Command {
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
-     * @param auto Флаг, указывающий, выполняется ли команда автоматически
      */
     override fun execute(tokens: List<String>, state: ClientState) {
         if (tokens.isEmpty()) {
