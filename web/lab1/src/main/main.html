@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            color: black;
+        }
+        #header {
+            font-family: monospace;
+            color: blue;
+            font-size: 18px;
+            margin-bottom: 2%;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        #graph {
+            width: 50%;
+            height: 100%;  
+            margin: 20px;
+        }
+
+        #rightPart {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; // чтобы не прижималось вправо
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .box {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        }
+
+        .group.vertical {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select, button {
+            margin: 2%;
+            padding: 1%;
+        }
+
+        button:hover {
+            background-color: lightblue;
+        }
+
+        tbody {
+            font-family: monospace;
+            color: black;
+            font-size: 18px;
+            border: 3px solid;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        Немыкин Ярослав Алексеевич; группа P3222; Вариант 405271
+    </header>
+
+    <div class="container">
+        <canvas id="graph" height="500px" width="500px" style="border:1px solid black;"></canvas>
+
+        <div id="rightPart">
+                <form class="box" action="" method="get">
+                    <div class="group vertical">
+                        <label>Определите занчение Х:</label><br>
+                        <label><input type="checkbox" name="x" value="-2"> -2 </label><br>
+                        <label><input type="checkbox" name="x" value="-1.5"> -1.5 </label><br>
+                        <label><input type="checkbox" name="x" value="-1"> -1 </label><br>
+                        <label><input type="checkbox" name="x" value="-0.5"> -0.5 </label><br>
+                        <label><input type="checkbox" name="x" value="0"> 0 </label><br>
+                        <label><input type="checkbox" name="x" value="0.5"> 0.5 </label><br>
+                        <label><input type="checkbox" name="x" value="1"> 1 </label><br>
+                        <label><input type="checkbox" name="x" value="1.5"> 1.5 </label><br>
+                        <label><input type="checkbox" name="x" value="2"> 2 </label>
+
+                    </div>
+
+                    <div class="group vertical">
+                        <label for="y">Определите значение Y:</label>
+                        <input type="text" id="y" name="y" placeholder="{-5 ... 3}" onkeydown="return event.key !== 'Enter'">
+                        <span id="yError" style="color:red; font-size:14px"></span>
+                    </div>
+
+                    <div class="group vertical">
+                        <label for="r">Определите значение R:</label>
+                        <select id="r" name="r">
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="submitBtn">Отправить</button>
+
+                </form>
+
+
+            <table id="resultTable">
+                <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Попадание</th>
+                    <th>Время сервера</th>
+                    <th>Время обработки</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const submitBtn = document.getElementById("submitBtn");
+        const yInput = document.getElementById("y");
+        const yError = document.getElementById("yError");
+
+        // Отправка данных на сервер + обновление таблицы из JSON
+        async function sendToServerAndUpdateTableByHistory() {
+          try {
+            // чтобы избежать дублей
+            submitBtn.disabled = true;
+
+            const params = new URLSearchParams({history});
+            const url = '/fcgi-bin/lab1-1.0-SNAPSHOT-jar-with-dependencies.jar?' + params.toString();
+
+            // отправляем GET-запрос и ждём JSON от сервера
+            const resp = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+
+            if (!resp.ok) {
+              const txt = await resp.text();
+              alert('Ошибка сервера: ' + resp.status + '\n' + txt);
+              return;
+            }
+
+            const data = await resp.json();
+
+            if (data.error) {
+              alert('Ошибка: ' + data.error);
+              return;
+            }
+
+            fillTableFromHistory(data.history);
+
+          } catch (err) {
+            console.error('Fetch error:', err);
+            alert('Ошибка при работе сервера: ' + err.message);
+          } finally {
+            // разблокируем кнопку
+            validateForm();
+          }
+        }
+
+        async function sendToServerAndUpdateTableByPoint(x, y, r) {
+          try {
+            // чтобы избежать дублей
+            submitBtn.disabled = true;
+
+            console.log(x,y,r);
+
+            const params = new URLSearchParams({x:String(x),y:String(y),r:String(r)});
+            const url = '/fcgi-bin/lab1-1.0-SNAPSHOT-jar-with-dependencies.jar?' + params.toString();
+
+            // отправляем GET-запрос и ждём JSON от сервера
+            const resp = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+
+            if (!resp.ok) {
+              const txt = await resp.text();
+              alert('Ошибка сервера: ' + resp.status + '\n' + txt);
+              return;
+            }
+
+            const data = await resp.json();
+
+            if (data.error) {
+              alert('Ошибка: ' + data.error);
+              return;
+            }
+
+            fillTableByPoint(data);
+
+          } catch (err) {
+            console.error('Fetch error:', err);
+            alert('Ошибка при работе сервера: ' + err.message);
+          } finally {
+            // разблокируем кнопку
+            validateForm();
+          }
+        }
+
+        function fillTableByPoint(data){
+            let resultTableBody = document.querySelector('#resultTable tbody');
+
+            let row = document.createElement('tr');
+
+            // создаем ячейки и добавляем их в строку
+            let xCell = document.createElement('td');
+            xCell.textContent = data.x;
+            row.appendChild(xCell);
+
+            let yCell = document.createElement('td');
+            yCell.textContent = data.y;
+            row.appendChild(yCell);
+
+            let rCell = document.createElement('td');
+            rCell.textContent = data.r;
+            row.appendChild(rCell);
+
+            let hitCell = document.createElement('td');
+            hitCell.textContent = data.hit;
+            row.appendChild(hitCell);
+
+            let serverTimeCell = document.createElement('td');
+            serverTimeCell.textContent = data.serverTime;
+            row.appendChild(serverTimeCell);
+
+            let procTimeCell = document.createElement('td');
+            procTimeCell.textContent = data.procTime;
+            row.appendChild(procTimeCell);
+
+            if (resultTableBody.firstChild) {
+                resultTableBody.insertBefore(row, resultTableBody.firstChild);
+            }
+            else {
+                resultTableBody.appendChild(row); // если таблица пустая
+            }
+        }
+
+        function fillTableFromHistory(history) {
+
+           let resultTableBody = document.querySelector('#resultTable tbody');
+
+           resultTableBody.innerHTML = '';
+
+            history.forEach(item => {
+                let row = document.createElement('tr');
+
+                // создаем ячейки и добавляем их в строку
+                let xCell = document.createElement('td');
+                xCell.textContent = item.x;
+                row.appendChild(xCell);
+
+                let yCell = document.createElement('td');
+                yCell.textContent = item.y;
+                row.appendChild(yCell);
+
+                let rCell = document.createElement('td');
+                rCell.textContent = item.r;
+                row.appendChild(rCell);
+
+                let hitCell = document.createElement('td');
+                hitCell.textContent = item.hit;
+                row.appendChild(hitCell);
+
+                let serverTimeCell = document.createElement('td');
+                serverTimeCell.textContent = item.serverTime;
+                row.appendChild(serverTimeCell);
+
+                let procTimeCell = document.createElement('td');
+                procTimeCell.textContent = item.procTime;
+                row.appendChild(procTimeCell);
+
+                resultTableBody.appendChild(row);
+            });
+
+        }
+
+
+        // отрисовка изображения
+        const canvas = document.getElementById('graph');
+        const ctx = canvas.getContext('2d');
+
+        const width = canvas.width;
+        const height = canvas.height;
+
+        const cx = width / 2;
+        const cy = height / 2;
+
+        function updateGraph(x, y, R) {
+            let fakeR = false;
+            R = Number(R);
+            if (isNaN(R)){
+                R = 1;
+                fakeR = true;
+            }
+            let scale = (cx-25)/R;
+            ctx.clearRect(0, 0, width, height);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 1;
+            ctx.closePath();
+            // Треугольник
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx, cy+R*scale);
+            ctx.lineTo(cx-R*scale, cy);
+            ctx.closePath();
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+            // квадрат
+            ctx.beginPath();
+            ctx.fillRect(cx, cy, R*scale/2, -R*scale);
+            // четверть-круг
+            ctx.beginPath();
+            ctx.arc(cx, cy, R*scale/2, 0, Math.PI/2, false);
+            ctx.lineTo(cx, cy);
+            ctx.fill();
+            ctx.closePath();
+            // Оси
+            ctx.beginPath();
+            ctx.moveTo(0, cy);
+            ctx.lineTo(width, cy); // X
+            ctx.moveTo(cx, 0);
+            ctx.lineTo(cy, height); // Y
+            ctx.stroke();
+            // Деления шкалы
+            ctx.fillStyle = 'black';
+            if (fakeR){
+                for(let i=-2*R; i<=2*R; i++) {
+                    if(i===0) continue;
+                    ctx.fillRect(cx + i*scale/2 - 1, cy - 3, 2, 6);
+                    ctx.fillRect(cx - 3, cy - i*scale/2 - 1, 6, 2);
+                    ctx.fillText(i/2+"R", cx + i*scale/2 - 10, cy + 15);
+                    ctx.fillText(i/2+"R", cx + 10, cy - i*scale/2 + 3);
+                }
+            }
+            else{
+                for(let i=-2*R; i<=2*R; i++) {
+                    if(i===0) continue;
+                    ctx.fillRect(cx + i*scale/2 - 1, cy - 3, 2, 6);
+                    ctx.fillRect(cx - 3, cy - i*scale/2 - 1, 6, 2);
+                    ctx.fillText(i/2, cx + i*scale/2 - 10, cy + 15);
+                    ctx.fillText(i/2, cx + 10, cy - i*scale/2 + 3);
+                }
+            }
+            // Точка
+            x = Number(x);
+            y = Number(y);
+            if (!isNaN(x) && !isNaN(y)){
+                ctx.fillStyle = `red`;
+                ctx.beginPath();
+                ctx.arc(cx+scale*x, cx-scale*y, 5, 0, Math.PI * 2, true);
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+        // Старт работы
+        updateGraph(NaN,NaN,NaN);
+        sendToServerAndUpdateTableByHistory();
+
+        // валидация
+        function validateForm() {
+            let xChecked = Array.from(document.getElementsByName("x")).some(ch => ch.checked);
+            let yStr = yInput.value.trim();
+            let yValid = /^-?\d+(\.\d+)?$/.test(yStr) && parseFloat(yStr) >= -5 && parseFloat(yStr) <= 3;
+
+            if (!yValid && yStr !== "") {
+                yError.textContent = "Y - число в диапазоне [-5; 3]";
+            } else {
+                yError.textContent = "";
+            }
+
+            submitBtn.disabled = !(xChecked && yValid);
+        }
+
+
+        function updateR(){
+            validateForm();
+            updateGraph(NaN, NaN, document.getElementById("r").value)
+        }
+
+        // обновление при изменении
+        document.getElementsByName("x").forEach(ch => ch.addEventListener("change", validateForm));
+        yInput.addEventListener("input", validateForm);
+        document.getElementById("r").addEventListener("change", updateR);
+
+        submitBtn.addEventListener("click", function () {
+            let xElements = document.querySelectorAll('input[name="x"]:checked');
+            let y = document.getElementById("y").value;
+            let r = document.getElementById("r").value;
+
+            xElements.forEach(xEl => {
+                let x = xEl.value;
+                updateGraph(x, y, r);
+
+                sendToServerAndUpdateTableByPoint(x, y, r);
+            })
+        });
+
+    </script>
+
+</body>
