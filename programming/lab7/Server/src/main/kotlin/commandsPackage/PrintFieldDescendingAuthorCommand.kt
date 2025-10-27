@@ -8,7 +8,7 @@ import Stage
 /**
  * Класс, реализующий команду вывода значений полей author всех элементов в порядке убывания
  */
-class PrintFieldDescendingAuthorCommand: Command {
+class PrintFieldDescendingAuthorCommand: InformationCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *

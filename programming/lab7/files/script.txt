@@ -1,4 +1,4 @@
-update e
+insert e
 3
 3 2
 3

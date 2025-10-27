@@ -5,7 +5,7 @@ import ClientState
 /**
  * Класс, реализующий команду запуска из файла.
  */
-class ExecuteScriptCommand: Command {
+class ExecuteScriptCommand: InformationCommand {
     /**
      * Программа полностью исполняется на клиентском приложении, поэтому ее выполнения никогда не будет.
      *

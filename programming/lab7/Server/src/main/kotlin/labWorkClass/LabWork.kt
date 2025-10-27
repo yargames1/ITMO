@@ -22,7 +22,8 @@ class LabWork(
     private val minimalPoint: Long,
     private val personalQualitiesMinimum: Long,
     private val difficulty: Difficulty,
-    private val author: Person
+    private val author: Person,
+    private val creator: String
 ) : Comparable<LabWork> {
 
     /**
@@ -41,7 +42,7 @@ class LabWork(
      * @return Строка с данными лабораторной работы.
      */
     override fun toString(): String {
-        return "$id,$name,$coordinates,$creationDate,$minimalPoint,$personalQualitiesMinimum,$difficulty,$author"
+        return "$id,$name,$coordinates,$creationDate,$minimalPoint,$personalQualitiesMinimum,$difficulty,$author. Принадлежит $creator"
     }
 
     /**

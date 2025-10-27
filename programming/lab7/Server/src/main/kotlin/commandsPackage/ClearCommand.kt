@@ -9,15 +9,15 @@ import Stage
  * Класс, реализующий команду очистки коллекции
  */
 
-class ClearCommand: Command {
+class ClearCommand: UpdateCommand {
     /**
      * Выполняет команду без аргументов.
      *
      * @param tokens Список, содержащий команду и её аргументы.
      */
     override fun execute(tokens: List<String>, state: ClientState) {
-        if (tokens.isEmpty()) {
-            LabWorkCollection.clearConnection()
+        if (tokens.size == 1) {
+            LabWorkCollection.clearConnection(tokens[0])
             ServerOutput.send("Коллекция успешно очищена")
         }
         else{

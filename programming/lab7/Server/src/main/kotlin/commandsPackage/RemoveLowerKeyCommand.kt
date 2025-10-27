@@ -5,7 +5,7 @@ import ClientState
 import ServerOutput
 import Stage
 
-class RemoveLowerKeyCommand: Command {
+class RemoveLowerKeyCommand: UpdateCommand {
     /**
      * Класс, реализующий команду удаления элементов, ключи которых меньше определенных
      */
@@ -15,8 +15,9 @@ class RemoveLowerKeyCommand: Command {
          *
          * @param tokens Список, содержащий команду и её аргументы.
          */
-        if (tokens.size == 1){
+        if (tokens.size == 2){
             if (tokens[0] in LabWorkCollection.getCollection().keys) {
+                val login = tokens[1]
                 val referenceKey = tokens[0]
                 val removedKeys = LabWorkCollection.getCollection()
                     .keys
@@ -24,7 +25,7 @@ class RemoveLowerKeyCommand: Command {
                     .filter { it < referenceKey }
                     .toList()
 
-                removedKeys.forEach { LabWorkCollection.removeFromCollection(it) }
+                removedKeys.forEach { LabWorkCollection.removeFromCollection(it, login) }
                 ServerOutput.send("Удаление завершено")
             }
             else{

@@ -8,18 +8,17 @@ import Stage
 /**
  * Класс, реализующий команду удаления элемента с определенным значением поля personalQualitiesMinimum
  */
-class RemoveAnyByPersonalQualitiesMinimumCommand: Command {
+class RemoveAnyByPersonalQualitiesMinimumCommand: UpdateCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
      */
     override fun execute(tokens: List<String>, state: ClientState) {
-        if (tokens.size == 1){
+        if (tokens.size == 2){
             val key = LabWorkCollection.getKeyByPQM(tokens[0].toLong())
             if (key!="") {
-                LabWorkCollection.removeFromCollection(key)
-                ServerOutput.send("Элемент успешно удален")
+                ServerOutput.send(LabWorkCollection.removeFromCollection(key, login = tokens[1]))
             }
             else{
                 ServerOutput.send("Элемента с таким значением personalQualitiesMinimum не существует")

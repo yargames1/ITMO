@@ -5,28 +5,26 @@ import labWorkClass.LabWorkCollection
 import ClientState
 import ServerOutput
 import Stage
+import managersPackage.DbManager
 
 /**
  * Класс, реализующий команду обновления объекта по id
  */
-class UpdateIdCommand: Command {
+class UpdateIdCommand: UpdateCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
      */
     override fun execute(tokens: List<String>, state: ClientState) {
-        val id = tokens[0].toIntOrNull()
-        val key: String = if (id != null) {
-            LabWorkCollection.getKeyById(id)
-        } else{
-            ""
-        }
+        val id = tokens[0].toInt()
+        val key: String = LabWorkCollection.getKeyById(id)
         if (key!="") {
             try {
-                LabWorkCollection.replaceInCollection(key, Generator.newLab(id, tokens.drop(1)))
-                ServerOutput.send("Элемент успешно обновлен")
-            }catch (e: Exception){
+                val loginIndex = tokens.size
+                ServerOutput.send(LabWorkCollection.replaceInCollection(key, tokens.take(loginIndex-1), login = tokens[loginIndex-1]))
+                }
+            catch (e: Exception){
                 ServerOutput.send(e.message.toString())
             }
         }

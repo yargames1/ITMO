@@ -7,7 +7,7 @@ import Stage
 /**
  * Класс, реализующий команду выхода из программы.
  */
-class ExitCommand: Command {
+class ExitCommand: InformationCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *

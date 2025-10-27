@@ -9,7 +9,7 @@ import Stage
 /**
  * Класс, реализующий команду замены элемента по ключу, если он больше старого
  */
-class ReplaceIfGreaterCommand: Command {
+class ReplaceIfGreaterCommand: UpdateCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
@@ -19,14 +19,9 @@ class ReplaceIfGreaterCommand: Command {
         val key = tokens[0]
         if (key in LabWorkCollection.getCollection().keys) {
             try {
-                val newLab = Generator.newLab(null, tokens.drop(1))
-                if (newLab > LabWorkCollection.getCollection().getValue(key)){
-                    LabWorkCollection.replaceInCollection(key, newLab)
-                    ServerOutput.send("Данные заменены")
-                }
-                else{
-                    ServerOutput.send("Данные не были заменены, значение оказалось меньше или равно")
-                }
+                val loginIndex = tokens.size
+                ServerOutput.send(LabWorkCollection.replaceInCollection(key, tokens.drop(1).take(loginIndex-1),
+                    1, tokens[loginIndex-1]))
             }catch (e: Exception){
                 ServerOutput.send(e.message.toString())
             }
@@ -34,8 +29,6 @@ class ReplaceIfGreaterCommand: Command {
         else{
             ServerOutput.send("Элемента с таким ключем не существует")
         }
-
-
 
         state.stage = Stage.WRITE_RESULT
     }

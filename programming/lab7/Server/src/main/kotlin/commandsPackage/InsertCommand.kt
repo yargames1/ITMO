@@ -5,11 +5,12 @@ import labWorkClass.LabWorkCollection
 import ClientState
 import ServerOutput
 import Stage
+import managersPackage.DbManager
 
 /**
  * Класс, реализующий команду вставки нового элемента коллекции
  */
-class InsertCommand: Command {
+class InsertCommand: UpdateCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
@@ -21,7 +22,8 @@ class InsertCommand: Command {
             .anyMatch { it == tokens[0] }  // Проверяем, есть ли такой ключ
         if (!keyExists){
             try {
-                LabWorkCollection.putInCollection(tokens[0], Generator.newLab(null, tokens.drop(1)))
+                val loginIndex = tokens.size
+                LabWorkCollection.putInCollection(tokens[0], tokens.drop(1).take(loginIndex-1), tokens[loginIndex-1])
                 ServerOutput.send("Новый элемент успешно создан")
             }catch (e: Exception){
                 ServerOutput.send(e.message.toString())

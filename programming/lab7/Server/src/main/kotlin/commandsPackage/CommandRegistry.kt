@@ -29,7 +29,10 @@ object CommandRegistry {
     )
     val specialCommands = mutableMapOf(
         "get_list_of_client_cmds" to GetClientCommands(),
-        "get_list_of_server_cmds" to GetServerCommand()
+        "get_list_of_server_cmds" to GetServerCommand(),
+        "logIn" to LogInCommand(),
+        "isTheLoginExist" to IsTheLoginExistCommand(),
+        "reg" to regCommand()
     )
     val clientCommands = mutableListOf(
         "insert",

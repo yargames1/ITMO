@@ -2,9 +2,6 @@ package commandsPackage
 
 import ClientState
 
-/**
- * Интерфейс для создания команд.
- */
 interface Command {
     /**
      * Выполняет команду с переданными аргументами.

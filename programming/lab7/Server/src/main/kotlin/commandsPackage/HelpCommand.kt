@@ -7,7 +7,7 @@ import Stage
 /**
  * Класс, реализующий команду помощи.
  */
-class HelpCommand: Command {
+class HelpCommand: InformationCommand {
     /**
      * Возвращает описание команды.
      *
@@ -33,3 +33,4 @@ class HelpCommand: Command {
         state.stage = Stage.WRITE_RESULT
     }
 }
+

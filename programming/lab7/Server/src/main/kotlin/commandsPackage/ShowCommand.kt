@@ -8,7 +8,7 @@ import Stage
 /**
  * Класс, реализующий команду вывода элементов коллекции в строковом представлении
  */
-class ShowCommand: Command {
+class ShowCommand: InformationCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
@@ -16,12 +16,13 @@ class ShowCommand: Command {
      */
     override fun execute(tokens: List<String>, state: ClientState) {
         if (tokens.isEmpty()){
+            ServerOutput.send("key - id,name,cordX,cordY,creationDate,minimalPoint,personalQualitiesMinimum,difficulty,name,birthday,height,weight,locX,locY,locZ. Кому принадлежит")
             for (key in LabWorkCollection.getCollection().keys){
                 ServerOutput.send("$key - ${LabWorkCollection.getCollection()[key]}")
             }
         }
         else {
-            ServerOutput.send("Введите команду верно - replace_if_lower key, где key - ключ элемента коллекции")}
+            ServerOutput.send("Команда не должна иметь аргументов")}
         state.stage = Stage.WRITE_RESULT
     }
     /**

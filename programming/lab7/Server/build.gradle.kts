@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     implementation(project(":Other"))
+    implementation(files("lib/postgresql.jar"))
 }
 
 

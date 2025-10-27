@@ -8,7 +8,7 @@ import Stage
 /**
  * Класс, реализующий команду вывода объекта с минимальным значением поля name
  */
-class MinByNameCommand: Command {
+class MinByNameCommand: InformationCommand {
 
     /**
      * Выполняет команду с переданными аргументами.

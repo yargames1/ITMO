@@ -8,17 +8,16 @@ import Stage
 /**
  * Класс, реализующий команду удаления элемента по ключу
  */
-class RemoveKeyCommand: Command {
+class RemoveKeyCommand: UpdateCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *
      * @param tokens Список, содержащий команду и её аргументы.
      */
     override fun execute(tokens: List<String>, state: ClientState) {
-        if (tokens.size == 1){
+        if (tokens.size == 2){
             if (tokens[0] in LabWorkCollection.getCollection().keys) {
-                LabWorkCollection.removeFromCollection(tokens[0])
-                ServerOutput.send("Элемент успешно удален")
+                ServerOutput.send(LabWorkCollection.removeFromCollection(tokens[0], login = tokens[1]))
             }
             else{
                 ServerOutput.send("Элемента с таким ключем не существует")

@@ -5,5 +5,5 @@ data class ClientState(
     var objectLength: Int? = null,
     var dataBuffer: ByteBuffer? = null,
     var resultToSend: ByteBuffer? = null,
-    var stage: Stage = Stage.READ,
+    @Volatile var stage: Stage = Stage.READ
 )

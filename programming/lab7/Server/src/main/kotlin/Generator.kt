@@ -29,9 +29,9 @@ object Generator {
      *
      * @return Элемент коллекции
      */
-    fun newLab(id: Int?, info: List<String>): LabWork {
+    fun newLab(id: Int, info: List<String>, login: String): LabWork {
 
-        val newId = id ?: newId()
+        val newId = id
         val creationDate = newDate()
 
         val name = info[0]
@@ -62,7 +62,8 @@ object Generator {
             minimalPoint,
             personalQualitiesMinimum,
             difficulty,
-            author
+            author,
+            login
         )
 
     }

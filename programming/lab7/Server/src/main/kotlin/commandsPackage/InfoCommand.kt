@@ -8,7 +8,7 @@ import Stage
 /**
  * Класс, реализующий команду получения информации о коллекции.
  */
-class InfoCommand: Command {
+class InfoCommand: InformationCommand {
     /**
      * Выполняет команду с переданными аргументами.
      *

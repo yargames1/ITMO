@@ -18,7 +18,7 @@ object IOManager {
     fun read(): String?{
         if (text.isEmpty()) {
             opendFiles.clear()
-            return readlnOrNull()
+            return readlnOrNull()?.trim()
         }
         else{
             println(text.first())
