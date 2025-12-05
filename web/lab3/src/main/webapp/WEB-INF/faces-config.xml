@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                                  http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+
+    <!-- ClockBean -->
+    <managed-bean>
+        <managed-bean-name>clockBean</managed-bean-name>
+        <managed-bean-class>org.example.beans.ClockBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <!-- PointBean -->
+    <managed-bean>
+        <managed-bean-name>pointBean</managed-bean-name>
+        <managed-bean-class>org.example.beans.PointBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+
+        <managed-property>
+            <property-name>resultsBean</property-name>
+            <value>#{resultsBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <!-- ResultsBean -->
+    <managed-bean>
+        <managed-bean-name>resultsBean</managed-bean-name>
+        <managed-bean-class>org.example.beans.ResultsBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Правила навигации по страницам -->
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>toMain</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/main.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>toIndex</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>
