@@ -1,7 +1,7 @@
 package org.example.beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PointBean implements Serializable {
 
@@ -9,11 +9,12 @@ public class PointBean implements Serializable {
     private Double y;
     private Double r;
 
+
     private ResultsBean resultsBean;
 
     public void submit() {
-        System.out.println("submit() called, resultsBean = " + resultsBean);
-        System.out.printf("x: %s y: %s r: %s%n", x, y, r);
+        // System.out.println("submit() called, resultsBean = " + resultsBean);
+        // System.out.printf("x: %s y: %s r: %s%n", x, y, r);
         long startTime = System.nanoTime();
 
         // Проверка попадания в область
@@ -25,10 +26,9 @@ public class PointBean implements Serializable {
         result.setY(y);
         result.setR(r);
         result.setHit(hit);
-        result.setServerTime(new Date());
+        result.setServerTime(LocalDateTime.now());
         result.setProcessingTime((System.nanoTime() - startTime)/ 1_000_000.0);
 
-        // Сохранение через application-scoped bean пока не реализуем
         resultsBean.addResult(result);
     }
 

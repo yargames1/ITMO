@@ -2,14 +2,14 @@ package org.example.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "point_results")
 public class PointResult implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_seq")
-    @SequenceGenerator(name = "point_seq", sequenceName = "point_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double x;
@@ -17,16 +17,15 @@ public class PointResult implements Serializable {
     private Double r;
     private Boolean hit; // попадание
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date serverTime;
+    private LocalDateTime  serverTime;
 
     private Double processingTime; // в миллисекундах
 
     // Конструктор по умолчанию (обязателен для JPA)
     public PointResult() {}
 
-    // Конструктор со всеми полями (опционально)
-    public PointResult(Double x, Double y, Double r, Boolean hit, Date serverTime, Double processingTime) {
+    // Конструктор со всеми полями
+    public PointResult(Double x, Double y, Double r, Boolean hit, LocalDateTime serverTime, Double processingTime) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -74,11 +73,11 @@ public class PointResult implements Serializable {
         this.hit = hit;
     }
 
-    public Date getServerTime() {
+    public LocalDateTime   getServerTime() {
         return serverTime;
     }
 
-    public void setServerTime(Date serverTime) {
+    public void setServerTime(LocalDateTime   serverTime) {
         this.serverTime = serverTime;
     }
 

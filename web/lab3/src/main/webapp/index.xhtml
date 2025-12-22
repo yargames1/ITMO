@@ -2,14 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ace="http://www.icefaces.org/icefaces/components">
+>
 
 <h:head>
     <title>Стартовая страница</title>
-    <h:outputScript library="javax.faces" name="jsf.js" />
+
 </h:head>
 
 <h:body>
+
+    <h:outputScript>
+        function updateClock(message) {
+        var el = document.getElementById('mainForm:clockOutput');
+        if (el) {
+        el.innerText = message;
+        }
+        }
+    </h:outputScript>
 
     <!-- ШАПКА -->
     <h:panelGroup style="font-size:18px; margin-bottom:2%; display:block; color: blue;">
@@ -18,29 +27,25 @@
         <b>Вариант:</b> 58999
     </h:panelGroup>
 
+    <f:websocket channel="clockChannel"
+                 scope="application"
+                 onmessage="updateClock"
+    />
+
     <h:form id="mainForm">
 
+
         <h:panelGroup id="clock">
-            <h:outputText value="#{clockBean.currentTime}" style="font-size:18px;" />
+            <h:outputText id="clockOutput" value="#{clockBean.currentTime}" style="font-size:18px;" />
         </h:panelGroup>
 
+        <h:outputText value="#{clockPushBean}" style="display:none;" />
         <br/><br/>
 
         <h:link value="Перейти к приложению"
                 outcome="toMain"
                 style="padding:10px 20px; font-size:16px;" />
     </h:form>
-
-    <h:outputScript target="body">
-        function pollClock() {
-        jsf.ajax.request(
-        document.getElementById("mainForm"),
-        null,
-        {execute: "mainForm", render: "mainForm:clock"}
-        );
-        }
-        setInterval(pollClock, 9000);
-    </h:outputScript>
 
 
 </h:body>
