@@ -1,0 +1,115 @@
+button,
+input,
+select,
+textarea {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.page {
+	font-family: sans-serif;
+}
+
+.auth-page {
+	flex: 1 1 0;
+	min-height: calc(100vh - 120px); 
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap:15px;
+}
+
+.auth-block {
+	width: clamp(200px, 90vw, 1400px);
+	padding:15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+	display:flex; 
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.head-info-block {
+	flex: 1 1 0;
+	display:flex; 
+	color: blue;
+	gap:10px;
+	justify-content: center;
+}
+.head-info-block p{
+	text-align: center;
+}
+	
+/* Desktop */
+@media (min-width: 1225px) {
+    .auth-block,
+	.auth-block input, 
+	.auth-block button, 
+	.switch-mode-btn  {
+		font-size: clamp(10px, 2vw, 50px)
+	}
+	.head-info-block{
+		font-size: clamp(10px, 2vw, 90px)
+	}
+}
+
+/* Tablet */
+@media (max-width: 1224px) and (min-width: 865px) {
+	.auth-block,
+	.auth-block input, 
+	.auth-block button, 
+	.switch-mode-btn  {
+		font-size:20px;
+	}
+	.head-info-block{
+		font-size:30px;
+	}
+}
+
+/* Mobile */
+@media (max-width: 864px) {
+	.auth-block input, 
+	.auth-block button, 
+	.switch-mode-btn  {
+		font-size:15px;
+	}
+	.head-info-block{
+		font-size:20px;
+	}
+	.head-info-block {
+		flex-direction: column;
+	}
+	.auth-page{
+		min-height: calc(100vh - 250px); 
+	}
+}
+
+.auth-block form {
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	padding:15px;
+	gap:15px;
+
+}
+
+.auth-block input {
+	width: 100%;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.auth-block button {
+	width: 100%;
+	padding: 10px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.error {
+	color: red;
+}

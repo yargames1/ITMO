@@ -1,0 +1,157 @@
+button,
+input,
+select,
+textarea {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+input[type="radio"] {
+	width: 1em;
+	height: 1em;
+}
+
+.container {
+	width: 97vw;
+	font-family: sans-serif;
+	display: flex;
+	
+}
+
+.left {
+	justify-content: center;
+	flex: 1 1 0;
+}
+
+.right {
+	flex: 1 1 0;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+}
+
+.graph {
+		width: 95%;
+		height: auto;
+	}
+
+.buttons-block{
+		display: flex;
+		gap:10%;
+		flex-direction: row;
+		justify-content: center;
+	}
+	
+.param-block{
+	margin:10px;
+	padding:10px;
+}
+
+/* Desktop */
+@media (min-width: 1225px) {
+	
+
+	.right {
+		display: flex;
+		gap: 20px;
+		flex-direction: row;
+	}
+	.param-block{
+		flex: 1 1 0;
+		max-height: 100vh;
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		flex-direction: column;
+		font-size: clamp(10px, 1vw, 50px);
+	}
+	.results{
+		font-size: clamp(10px, 1vw, 50px);
+	}
+
+	
+}
+
+/* Tablet */
+@media (max-width: 1224px) and (min-width: 865px) {
+	
+	.right {
+		flex-direction: column;
+	}
+
+}
+
+/* Mobile */
+@media (max-width: 864px) {
+	.container {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.left {
+		justify-content: center;
+		align-items: center;
+		flex: 1 1 0;
+	}
+	.graph {
+		width: 100%;
+		height: auto;
+	}
+	.right {
+		flex-direction: column;
+	}
+	.results{
+		font-size: clamp(9px, 2vw, 16px);
+	}
+}
+
+.graph {
+  border: 1px solid black;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ccc;
+	padding: 15px;
+	margin-bottom: 20px;
+	gap: 10px;
+}
+
+.x-line {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.y-line {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.r-line {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.results {
+	align-self: flex-start;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.results th,
+.results td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.logout-link {
+  display: inline-block;
+  margin-top: 20px;
+}
