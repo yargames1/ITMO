@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="HitPU" transaction-type="JTA">
+
+        <!-- JTA datasource из standalone.xml На прошлом курсе был studs, так что я решил его переиспользовать-->
+        <jta-data-source>java:/jdbc/StudsDB</jta-data-source>
+
+        <!-- Entity-классы -->
+        <class>org.example.entity.PointResult</class>
+        <class>org.example.entity.User</class>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.transaction.jta.platform"
+                      value="org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform"/>
+            <property name="hibernate.default_schema" value="s405271"/>
+        </properties>
+    </persistence-unit>
+</persistence>
