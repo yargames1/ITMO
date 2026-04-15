@@ -1,6 +1,6 @@
 name: hello
 limit: 2000
-memory_size: 0x1000
+memory_size: 8192
 memory_mapped_io:
   0x80: [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 10]
   0x84: []
@@ -16,7 +16,7 @@ reports:
       numio[0x84]: {io:0x84:dec}
       numio[0x80]: {io:0x80:sym}
       numio[0x84]: {io:0x84:sym}
-      {memory:0:120}
+      {memory:0:31}
     assert: |
       numio[0x80]: [] >>> []
       numio[0x84]: [] >>> [72,101,108,108,111,32,87,111,114,108,100]
