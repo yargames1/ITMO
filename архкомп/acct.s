@@ -20,6 +20,7 @@ const_Z:      .word 0x5A
 const_a:      .word 0x61
 const_z:      .word 0x7A
 const_32:     .word 0x20
+const_space:  .word 0x20
 
 input_port:   .word 0x80
 output_port:  .word 0x84
@@ -41,15 +42,37 @@ read_loop:
     store_addr tmp        ; buffer <- символ
     
     ; Проверка: символ == 10?
-    load_imm const_n
-    load_acc              ; acc = 10
-    sub tmp               ; 10 - символ  
+    load_addr  const_n     ; acc = 10
+    sub tmp               ; 10 - символ
     beqz n              ; Если == \n, выход
-    
 
+    ; Проверка: символ == пробел?
+    load_addr  const_space     ; acc = пробле
+    sub tmp               ; 10 - символ
+    bnez first_symb             ; Если != пробел, пропуск
+    load_addr   const_1
+    store      flagis_upper_flag ; обновляем флаг
+
+    
+first_symb:
     ;Проверка регистра
-    load_imm flagis_upper_flag ; acc = flag
-    bnez upper_symb ; Если флаг поднят (начало слова)
+    load_addr flagis_upper_flag ; acc = flag
+    beqz another_symb ; Если не флаг поднят то прыгаем
+    load_addr tmp
+    sub const_a ; если будет больше 0, то скорее всего среди не загланых
+    ble return_point ; видимо заглавный (или другой), все хорошо ------------------------------------------------
+    sub const_z ; если меньше 0, то точно не заглавная
+    bgt return_point ; ну видимо другой какой-то (не буква) -----------------------------------------------------
+    ; если мы оказались здесь, значит символ - строчная бкува, исправим!
+    load_addr tmp
+    sub const_32
+    store_addr tmp
+    ; и сменим флаг до нового пробела
+    load_addr   const_0
+    store      flagis_upper_flag
+    jmp return_point
+
+another_symb:
 
 return_point:
     ; Эхо: символ -> output_port (0x84)
@@ -64,8 +87,7 @@ return_point:
     jmp read_loop
 
 n:
-    load_imm const_0
-    load_acc
+    load_addr const_0
     store_ind ptr
 
     load         ptr
@@ -76,8 +98,7 @@ fill_5f:
     sub     buf_size
     beqz         end  
 
-    load_imm const_5f
-    load_acc
+    load_addr const_5f
     store_ind ptr
 
     load         ptr
@@ -89,7 +110,3 @@ fill_5f:
 
 end:
     halt
-
-
-upper_symb:
-    jmp return_point
