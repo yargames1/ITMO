@@ -4,13 +4,22 @@ buffer:       .byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 tmp:          .word 0
 ptr:          .word 0
+flagis_upper_flag: .word 1 ; По умолчанию включен
 
 const_n:      .word 10
-const_FF:     .word  0xFF
 const_0:      .word  0
 const_1:      .word  1
 const_5f:     .word 0x5F
 buf_size:     .word 0x20
+
+;Заглавные A-Z: 0x41-0x5A (65-90)
+;Строчные  a-z: 0x61-0x7A (97-122)
+;Разница:    32 (0x20)
+const_A:      .word 0x42
+const_Z:      .word 0x5A
+const_a:      .word 0x61
+const_z:      .word 0x7A
+const_32:     .word 0x20
 
 input_port:   .word 0x80
 output_port:  .word 0x84
@@ -37,6 +46,12 @@ read_loop:
     sub tmp               ; 10 - символ  
     beqz n              ; Если == \n, выход
     
+
+    ;Проверка регистра
+    load_imm flagis_upper_flag ; acc = flag
+    bnez upper_symb ; Если флаг поднят (начало слова)
+
+return_point:
     ; Эхо: символ -> output_port (0x84)
     load_addr tmp         ; acc = символ
     store_ind output_port ; запись в 0x84
@@ -47,7 +62,7 @@ read_loop:
     store        ptr                           ;     ptr <- ptr + const_1
 
     jmp read_loop
-    
+
 n:
     load_imm const_0
     load_acc
@@ -74,3 +89,7 @@ fill_5f:
 
 end:
     halt
+
+
+upper_symb:
+    jmp return_point
