@@ -1,0 +1,15 @@
+update 5
+3
+3 2
+3
+3
+EASY
+o
+4000.04.04
+12:12
+-01:00
+3
+3
+3 3 3
+show
+execute_script 1.txt
