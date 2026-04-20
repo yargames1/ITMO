@@ -21,6 +21,7 @@ const_a:      .word 0x61
 const_z:      .word 0x7A
 const_32:     .word 0x20
 const_space:  .word 0x20
+const_cccc:   .word 0xCCCCCCCC ; для ошибок
 
 input_port:   .word 0x80
 output_port:  .word 0x84
@@ -34,12 +35,12 @@ _start:
 
 read_loop:
     sub     buf_size
-    beqz         end  
+    beqz         overflow  
     
     ; Чтение с input_port (0x80)
     load input_port
     load_acc              
-    store_addr tmp        ; buffer <- символ
+    store_addr tmp        ; tmp <- символ
     
     ; Проверка: символ == 10?
     load_addr  const_n     ; acc = 10
@@ -52,6 +53,8 @@ read_loop:
     bnez first_symb             ; Если != пробел, пропуск
     load_addr   const_1
     store      flagis_upper_flag ; обновляем флаг
+    jmp echo ; и уходим на вывод
+
 
     
 first_symb:
@@ -62,10 +65,10 @@ first_symb:
     ;Проверка регистра
     load_addr tmp ; acc = символ
     sub const_a ; если больше 0, то после (или он и есть) строчной а
-    ble flag_off ; меньше строчной а, все хорошо, не правим (либо заглавный, либо не буква)
+    bltz flag_off ; меньше строчной а, все хорошо, не правим (либо заглавный, либо не буква)
     add const_a
     sub const_z ; если меньше 0, то точно строчная (между a и z)
-    bgt flag_off ; больше, видимо другой какой-то (не буква)
+    bgtz flag_off ; больше, видимо другой какой-то (не буква)
 
     ; если мы оказались здесь, значит символ - строчная бкува, принимаемся за исправление
     load_addr tmp ;acc = tmp = символ
@@ -80,10 +83,10 @@ another_symb:
     ;Проверка регистра
     load_addr tmp ; acc = символ
     sub const_A ; если больше 0, то после (или он и есть) загловной A
-    ble echo ; меньше загловной A, все хорошо, не правим (либо стьрочной, либо не буква)
+    bltz echo ; меньше загловной A, все хорошо, не правим (либо стьрочной, либо не буква)
     add const_A
     sub const_Z ; если меньше 0, то точно строчная (между A и Z)
-    bgt echo ; больше, видимо другой какой-то (не буква)
+    bgtz echo ; больше, видимо другой какой-то (не буква)
     
     ; если мы оказались здесь, значит символ - загловной бкува, принимаемся за исправление
     load_addr tmp ; acc = tmp = символ
@@ -99,7 +102,7 @@ flag_off:
 echo:
     ; Эхо: символ -> output_port (0x84)
     load_addr tmp         ; acc = символ
-    store_ind output_port ; запись в 0x84
+    ;store_ind output_port ; запись в 0x84
     store_ind ptr   ; записть в буфер(1 ячейку)
 
     load         ptr
@@ -132,3 +135,8 @@ fill_5f:
 
 end:
     halt
+
+overflow:
+    load_addr const_cccc
+    store_ind output_port
+    jmp end
