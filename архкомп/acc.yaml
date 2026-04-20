@@ -1,16 +1,15 @@
-name: "hello_world_case_fix"
-limit: 10000
-memory_size: 8192
+name: "assert capital_case_cstr('hello world\n') == ('Hello World', '')
+# and mem[0..31]: 48 65 6c 6c 6f 20 57 6f 72 6c 64 00 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f"
+limit: 2000
+memory_size: 0x1000
 memory_mapped_io:
-  0x80: [72, 101, 108, 108, 79, 32, 119, 111, 114, 76, 68, 10]  # "HellO worLD\n"
+  0x80: [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 10]
   0x84: []
 reports:
-  - name: Step-by-step
-    slice: all
-    view: |
-      {pc}: {instruction} {pc:label}
-  - name: Result
+  - name: Check results
     slice: last
+    filter:
+      - state
     view: |
       numio[0x80]: {io:0x80:dec}
       numio[0x84]: {io:0x84:dec}
@@ -19,7 +18,7 @@ reports:
       {memory:0:31}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> [72,101,108,108,111,32,119,111,114,108,100]
+      numio[0x84]: [] >>> [72,101,108,108,111,32,87,111,114,108,100]
       symio[0x80]: "" >>> ""
-      symio[0x84]: "" >>> "Hello world"
-      mem[0..31]:     48 65 6c 6c 6f 20 77 6f 72 6c 64 00 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f
+      symio[0x84]: "" >>> "Hello World"
+      mem[0..31]: 	48 65 6c 6c 6f 20 57 6f 72 6c 64 00 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f

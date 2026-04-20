@@ -11,6 +11,8 @@ const_0:      .word  0
 const_1:      .word  1
 const_5f:     .word 0x5F
 buf_size:     .word 0x20
+const_FF:     .word  0xFF
+const_error:   .word 0xCCCCCCCC ; для ошибок
 
 ;Заглавные A-Z: 0x41-0x5A (65-90)
 ;Строчные  a-z: 0x61-0x7A (97-122)
@@ -21,7 +23,6 @@ const_a:      .word 0x61
 const_z:      .word 0x7A
 const_32:     .word 0x20
 const_space:  .word 0x20
-const_cccc:   .word 0xCCCCCCCC ; для ошибок
 
 input_port:   .word 0x80
 output_port:  .word 0x84
@@ -35,7 +36,7 @@ _start:
 
 read_loop:
     sub     buf_size
-    beqz         overflow  
+    beqz         overflow  ; Проверка на переполнение
     
     ; Чтение с input_port (0x80)
     load input_port
@@ -55,8 +56,6 @@ read_loop:
     store      flagis_upper_flag ; обновляем флаг
     jmp echo ; и уходим на вывод
 
-
-    
 first_symb:
     ;Проверка на первый символ слова
     load_addr flagis_upper_flag ; acc = flag
@@ -95,12 +94,13 @@ another_symb:
 
     jmp echo
 
+; после первой буквы отключаем флаг
 flag_off:
     load_addr const_0 
     store_addr flagis_upper_flag
 
+; и пишем в буффер измененные данные
 echo:
-    ; Эхо: символ -> output_port (0x84)
     load_addr tmp         ; acc = символ
     ;store_ind output_port ; запись в 0x84
     store_ind ptr   ; записть в буфер(1 ячейку)
@@ -109,22 +109,24 @@ echo:
     add          const_1
     store        ptr                           ;     ptr <- ptr + const_1
 
-    jmp read_loop
+    jmp read_loop ; повторяем для нового символа
 
+; когда получаем \n, чтение заканчивается
 n:
     load_addr const_0
-    store_ind ptr
+    store_ind ptr     ; buffer[ptr] = 0
 
     load         ptr
     add          const_1
     store        ptr                           ;     ptr <- ptr + const_1
 
+; заполняем оставшийся буффер f5
 fill_5f:
     sub     buf_size
-    beqz         end  
+    beqz         output  ; проверяем, что есть место
 
     load_addr const_5f
-    store_ind ptr
+    store_ind ptr       ; запись в буффер
 
     load         ptr
     add          const_1
@@ -132,11 +134,31 @@ fill_5f:
 
     jmp fill_5f
 
+output:
+
+    load_imm     buffer
+    store        ptr                         ; ptr <- buffer
+
+
+while:
+    load_acc
+    and          const_FF       ; получаем данные из buffer[ptr], умножаем на FF, чтобы получить первые 8 бит (байт)
+    beqz         end       ; если встретили 0 - конец вывода                  
+    
+    store_ind    output_port                 ;     *output_addr <- *ptr & const_FF
+
+    load         ptr
+    add          const_1
+    store        ptr                         ;     ptr <- ptr + const_1
+
+
+    jmp          while  ; продолжаем для следующей ячейки из буфера
 
 end:
     halt
 
+; обработка переполнения
 overflow:
-    load_addr const_cccc
-    store_ind output_port
+    load_addr const_error
+    store_ind output_port ; в вывод кидаем ошибку
     jmp end

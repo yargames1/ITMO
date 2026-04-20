@@ -1,0 +1,14 @@
+C:\ITMO\web\lab4\back\src\main\java\org\example\entity\PointResult.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\entity\User.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\repo\PointResultRepository.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\repo\UserRepository.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\AuthController.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\dto\LoginRequest.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\dto\PointRequest.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\dto\PointResultDto.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\dto\UserDto.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\PointController.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\rest\RestApplication.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\service\AuthService.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\service\PasswordService.java
+C:\ITMO\web\lab4\back\src\main\java\org\example\service\PointService.java
