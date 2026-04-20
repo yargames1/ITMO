@@ -15,7 +15,7 @@ buf_size:     .word 0x20
 ;Заглавные A-Z: 0x41-0x5A (65-90)
 ;Строчные  a-z: 0x61-0x7A (97-122)
 ;Разница:    32 (0x20)
-const_A:      .word 0x42
+const_A:      .word 0x41
 const_Z:      .word 0x5A
 const_a:      .word 0x61
 const_z:      .word 0x7A
@@ -26,7 +26,7 @@ input_port:   .word 0x80
 output_port:  .word 0x84
 
 .text
-.org 0x88
+.org 0x200
 _start:
 
     load_imm    buffer
@@ -55,26 +55,48 @@ read_loop:
 
     
 first_symb:
-    ;Проверка регистра
+    ;Проверка на первый символ слова
     load_addr flagis_upper_flag ; acc = flag
-    beqz another_symb ; Если не флаг поднят то прыгаем
-    load_addr tmp
-    sub const_a ; если будет больше 0, то скорее всего среди не загланых
-    ble return_point ; видимо заглавный (или другой), все хорошо ------------------------------------------------
-    sub const_z ; если меньше 0, то точно не заглавная
-    bgt return_point ; ну видимо другой какой-то (не буква) -----------------------------------------------------
-    ; если мы оказались здесь, значит символ - строчная бкува, исправим!
-    load_addr tmp
-    sub const_32
-    store_addr tmp
-    ; и сменим флаг до нового пробела
-    load_addr   const_0
-    store      flagis_upper_flag
-    jmp return_point
+    beqz another_symb ; Если не флаг поднят то прыгаем - это не начало слова
+
+    ;Проверка регистра
+    load_addr tmp ; acc = символ
+    sub const_a ; если больше 0, то после (или он и есть) строчной а
+    ble flag_off ; меньше строчной а, все хорошо, не правим (либо заглавный, либо не буква)
+    add const_a
+    sub const_z ; если меньше 0, то точно строчная (между a и z)
+    bgt flag_off ; больше, видимо другой какой-то (не буква)
+
+    ; если мы оказались здесь, значит символ - строчная бкува, принимаемся за исправление
+    load_addr tmp ;acc = tmp = символ
+    sub const_32 ; символ -> СИМВОЛ
+    store_addr tmp ; tmp = СИМВОЛ
+
+    jmp flag_off
 
 another_symb:
+    ; Аналогично, но теперь проверка на строчной
 
-return_point:
+    ;Проверка регистра
+    load_addr tmp ; acc = символ
+    sub const_A ; если больше 0, то после (или он и есть) загловной A
+    ble echo ; меньше загловной A, все хорошо, не правим (либо стьрочной, либо не буква)
+    add const_A
+    sub const_Z ; если меньше 0, то точно строчная (между A и Z)
+    bgt echo ; больше, видимо другой какой-то (не буква)
+    
+    ; если мы оказались здесь, значит символ - загловной бкува, принимаемся за исправление
+    load_addr tmp ; acc = tmp = символ
+    add const_32 ; СИМВОЛ -> символ
+    store_addr tmp ; tmp = символ
+
+    jmp echo
+
+flag_off:
+    load_addr const_0 
+    store_addr flagis_upper_flag
+
+echo:
     ; Эхо: символ -> output_port (0x84)
     load_addr tmp         ; acc = символ
     store_ind output_port ; запись в 0x84
