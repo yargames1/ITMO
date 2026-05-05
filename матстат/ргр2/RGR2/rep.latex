@@ -1,0 +1,122 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{hyperref}
+
+\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.1}
+
+\begin{document}
+
+% Титульный
+\begin{center}
+\textbf{РГР №2. Проверка статистических гипотез}\\
+Вариант: A-10, $n=96$, $\alpha=0.05$\\
+Выполнили: Казорин Д.Д., \underline{\hspace{4cm}}\\
+Группа P3220, 2026
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+% Задание 1 + график
+\section*{1. Равенство матожиданий ($X_1$, $X_2$)}
+$H_0\!:\mu_1=\mu_2$, $H_1\!:\mu_1\neq\mu_2$\\
+Критерий: $t$-Стьюдента (двухвыборочный, равные дисперсии)\\
+\[
+t = \frac{\bar X_1-\bar X_2}{S_p\sqrt{\frac1n+\frac1n}},\quad df=190
+\]
+\textbf{Результаты:} $t_{\text{набл}}=-3.7688$, $p=0.000219$, $t_{\text{крит}}=\pm1.9725$\\
+\textbf{Вывод:} $|t|>t_{\text{крит}}$ $\Rightarrow$ \textbf{отвергаем $H_0$}.\\
+\textit{Ошибка I рода:} отвергнуть верное равенство средних, $P=\alpha=0.05$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{fig1_boxplot.png}
+\caption{Boxplot: сравнение выборок $X_1$ и $X_2$}
+\end{figure}
+
+% Задание 2 + график
+\section*{2. Дисперсия ($X_3$)}
+$H_0\!:\sigma^2=63.53$, $H_1\!:\sigma^2\neq63.53$\\
+Критерий: $\chi^2$ для дисперсии нормального распределения\\
+\[
+\chi^2 = \frac{(n-1)s^2}{\sigma_0^2},\quad df=95
+\]
+\textbf{Результаты:} $s^2=69.9465$, $\chi^2_{\text{набл}}=104.5949$, $p=0.4703$\\
+Критическая область: $(0;69.92]\cup[123.86;+\infty)$\\
+\textbf{Вывод:} $\chi^2_{\text{набл}}\in(69.92;123.86)$ $\Rightarrow$ \textbf{не отвергаем $H_0$}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{fig2_X3_hist.png}
+\caption{Гистограмма $X_3$ с наложенной нормальной кривой}
+\end{figure}
+
+% Задание 3
+\section*{3. Непараметрический критерий ($X_1$, $X_2$)}
+$H_0$: распределения идентичны, $H_1$: различаются\\
+Критерий: Манна–Уитни\\
+\textbf{Результаты:} $U=3220.00$, $p=0.000313$\\
+\textbf{Вывод:} $p<\alpha$ $\Rightarrow$ \textbf{отвергаем $H_0$}.\\
+\textit{Сравнение с п.1:} выводы совпали $\checkmark$
+
+% Задание 4 + 2 графика
+\section*{4. Критерий согласия Пирсона ($X_4\sim\text{Exp}(\lambda=0.109)$)}
+$H_0$: $X_4$ имеет закон $\text{Exp}(0.109)$, $H_1$: иной закон\\
+Критерий: $\chi^2$ Пирсона, $df=k-1=5$ ($\lambda$ задан)\\
+\[
+\chi^2 = \sum\frac{(n_k-np_k)^2}{np_k}
+\]
+\begin{table}[h]\centering\small
+\begin{tabular}{lcc}
+\toprule
+Интервал & $n_k$ (набл.) & $np_k$ (ожид.) \\
+\midrule
+$[0.05;4.18)$ & 37 & 34.58 \\
+$[4.18;8.30)$ & 27 & 22.06 \\
+$[8.30;12.43)$ & 12 & 14.07 \\
+$[12.43;16.55)$ & 7 & 8.97 \\
+$[16.55;20.68)$ & 7 & 8.41 \\
+$[20.68;28.93]$ & 6 & 7.91 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\textbf{Результаты:} $\chi^2_{\text{набл}}=4.8999$, $p=0.4282$, $\chi^2_{\text{крит}}(0.05;5)=11.0705$\\
+\textbf{Вывод:} $\chi^2_{\text{набл}}<\chi^2_{\text{крит}}$ $\Rightarrow$ \textbf{не отвергаем $H_0$}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{fig3_X4_exp.png}
+\caption{Гистограмма $X_4$ с теоретической плотностью $\text{Exp}(0.109)$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{fig4_QQplot.png}
+\caption{Q-Q plot: проверка согласия с показательным распределением}
+\end{figure}
+
+% Итог
+\section*{Итог}
+\begin{tabular}{lll}
+\toprule
+Задание & Критерий & Решение \\
+\midrule
+1. $\mu_1=\mu_2$ & $t$-Стьюдента & ❌ отвергаем \\
+2. $\sigma^2=63.53$ & $\chi^2$ (дисперсия) & ✅ не отвергаем \\
+3. Распределения одинаковы & Манна–Уитни & ❌ отвергаем \\
+4. $X_4\sim\text{Exp}(0.109)$ & $\chi^2$ Пирсона & ✅ не отвергаем \\
+\bottomrule
+\end{tabular}
+
+\vfill
+\small\textit{Вычисления: Python (scipy.stats, numpy, pandas, matplotlib).}
+
+\end{document}
