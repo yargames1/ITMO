@@ -102,7 +102,6 @@ flag_off:
 ; и пишем в буффер измененные данные
 echo:
     load_addr tmp         ; acc = символ
-    ;store_ind output_port ; запись в 0x84
     store_ind ptr   ; записть в буфер(1 ячейку)
 
     load         ptr
