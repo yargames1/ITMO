@@ -1,0 +1,17 @@
+name: "pair_swap_cstr('abcd') == 'badc'"
+limit: 300
+memory_size: 0x1000
+memory_mapped_io:
+  0x80: [97, 98, 99, 100, 0]
+  0x84: []
+reports:
+  - name: Check results
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:dec}
+      numio[0x84]: {io:0x84:dec}
+      symio[0x84]: {io:0x84:sym}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> [98,97,100,99,0]
+      symio[0x84]: "" >>> "badc\0"

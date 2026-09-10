@@ -1,0 +1,12 @@
+limit: 500
+memory_size: 1024
+memory_mapped_io:
+  0x80: [15]
+  0x84: []
+reports:
+  - name: Result verification
+    slice: last
+    view: |
+      numio[0x84]: {io:0x84:dec}
+    assert: |
+      numio[0x84]: [] >>> [-268435456]
