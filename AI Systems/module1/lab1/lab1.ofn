@@ -1,0 +1,231 @@
+Prefix(:=<http://www.semanticweb.org/technopark/ontologies/2026/8/untitled-ontology-2/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(untitled-ontology-2:=<http://www.semanticweb.org/technopark/ontologies/2026/8/untitled-ontology-2#>)
+
+
+Ontology(<http://www.semanticweb.org/technopark/ontologies/2026/8/untitled-ontology-2>
+
+Declaration(Class(untitled-ontology-2:Character))
+Declaration(Class(untitled-ontology-2:Class))
+Declaration(Class(untitled-ontology-2:Enemy))
+Declaration(Class(untitled-ontology-2:MagicClass))
+Declaration(Class(untitled-ontology-2:Player))
+Declaration(Class(untitled-ontology-2:Race))
+Declaration(Class(untitled-ontology-2:Village))
+Declaration(ObjectProperty(untitled-ontology-2:birthPlace))
+Declaration(ObjectProperty(untitled-ontology-2:bornRace))
+Declaration(ObjectProperty(untitled-ontology-2:hasClass))
+Declaration(ObjectProperty(untitled-ontology-2:hostileRace))
+Declaration(ObjectProperty(untitled-ontology-2:playing))
+Declaration(DataProperty(untitled-ontology-2:birthYear))
+Declaration(NamedIndividual(untitled-ontology-2:ada))
+Declaration(NamedIndividual(untitled-ontology-2:artem))
+Declaration(NamedIndividual(untitled-ontology-2:bard))
+Declaration(NamedIndividual(untitled-ontology-2:buga))
+Declaration(NamedIndividual(untitled-ontology-2:dwarf))
+Declaration(NamedIndividual(untitled-ontology-2:elf))
+Declaration(NamedIndividual(untitled-ontology-2:gaga))
+Declaration(NamedIndividual(untitled-ontology-2:goblin))
+Declaration(NamedIndividual(untitled-ontology-2:human))
+Declaration(NamedIndividual(untitled-ontology-2:illidan))
+Declaration(NamedIndividual(untitled-ontology-2:ivan))
+Declaration(NamedIndividual(untitled-ontology-2:mage))
+Declaration(NamedIndividual(untitled-ontology-2:oleg))
+Declaration(NamedIndividual(untitled-ontology-2:rora))
+Declaration(NamedIndividual(untitled-ontology-2:rouge))
+Declaration(NamedIndividual(untitled-ontology-2:senshi))
+Declaration(NamedIndividual(untitled-ontology-2:shmig))
+Declaration(NamedIndividual(untitled-ontology-2:torvald))
+Declaration(NamedIndividual(untitled-ontology-2:vanya))
+Declaration(NamedIndividual(untitled-ontology-2:vuga))
+Declaration(NamedIndividual(untitled-ontology-2:warrior))
+############################
+#   Object Properties
+############################
+
+# Object Property: untitled-ontology-2:birthPlace (untitled-ontology-2:birthPlace)
+
+FunctionalObjectProperty(untitled-ontology-2:birthPlace)
+ObjectPropertyDomain(untitled-ontology-2:birthPlace untitled-ontology-2:Character)
+ObjectPropertyRange(untitled-ontology-2:birthPlace untitled-ontology-2:Village)
+
+# Object Property: untitled-ontology-2:bornRace (untitled-ontology-2:bornRace)
+
+FunctionalObjectProperty(untitled-ontology-2:bornRace)
+ObjectPropertyDomain(untitled-ontology-2:bornRace untitled-ontology-2:Character)
+ObjectPropertyRange(untitled-ontology-2:bornRace untitled-ontology-2:Race)
+
+# Object Property: untitled-ontology-2:hasClass (untitled-ontology-2:hasClass)
+
+FunctionalObjectProperty(untitled-ontology-2:hasClass)
+ObjectPropertyDomain(untitled-ontology-2:hasClass untitled-ontology-2:Character)
+ObjectPropertyRange(untitled-ontology-2:hasClass untitled-ontology-2:Class)
+
+# Object Property: untitled-ontology-2:hostileRace (untitled-ontology-2:hostileRace)
+
+FunctionalObjectProperty(untitled-ontology-2:hostileRace)
+ObjectPropertyDomain(untitled-ontology-2:hostileRace untitled-ontology-2:Race)
+ObjectPropertyRange(untitled-ontology-2:hostileRace untitled-ontology-2:Race)
+
+# Object Property: untitled-ontology-2:playing (untitled-ontology-2:playing)
+
+FunctionalObjectProperty(untitled-ontology-2:playing)
+InverseFunctionalObjectProperty(untitled-ontology-2:playing)
+ObjectPropertyDomain(untitled-ontology-2:playing untitled-ontology-2:Player)
+ObjectPropertyRange(untitled-ontology-2:playing untitled-ontology-2:Character)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: untitled-ontology-2:birthYear (untitled-ontology-2:birthYear)
+
+DataPropertyDomain(untitled-ontology-2:birthYear untitled-ontology-2:Character)
+DataPropertyRange(untitled-ontology-2:birthYear xsd:integer)
+
+
+
+############################
+#   Classes
+############################
+
+# Class: untitled-ontology-2:Enemy (untitled-ontology-2:Enemy)
+
+SubClassOf(untitled-ontology-2:Enemy untitled-ontology-2:Character)
+
+# Class: untitled-ontology-2:MagicClass (untitled-ontology-2:MagicClass)
+
+SubClassOf(untitled-ontology-2:MagicClass untitled-ontology-2:Class)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: untitled-ontology-2:ada (untitled-ontology-2:ada)
+
+ClassAssertion(untitled-ontology-2:Village untitled-ontology-2:ada)
+
+# Individual: untitled-ontology-2:artem (untitled-ontology-2:artem)
+
+ClassAssertion(untitled-ontology-2:Player untitled-ontology-2:artem)
+ObjectPropertyAssertion(untitled-ontology-2:playing untitled-ontology-2:artem untitled-ontology-2:illidan)
+
+# Individual: untitled-ontology-2:bard (untitled-ontology-2:bard)
+
+ClassAssertion(untitled-ontology-2:MagicClass untitled-ontology-2:bard)
+
+# Individual: untitled-ontology-2:buga (untitled-ontology-2:buga)
+
+ClassAssertion(untitled-ontology-2:Enemy untitled-ontology-2:buga)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:buga untitled-ontology-2:rora)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:buga untitled-ontology-2:goblin)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:buga untitled-ontology-2:warrior)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:buga "1840"^^xsd:integer)
+
+# Individual: untitled-ontology-2:dwarf (untitled-ontology-2:dwarf)
+
+ClassAssertion(untitled-ontology-2:Race untitled-ontology-2:dwarf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:dwarf untitled-ontology-2:elf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:dwarf untitled-ontology-2:goblin)
+
+# Individual: untitled-ontology-2:elf (untitled-ontology-2:elf)
+
+ClassAssertion(untitled-ontology-2:Race untitled-ontology-2:elf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:elf untitled-ontology-2:dwarf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:elf untitled-ontology-2:goblin)
+
+# Individual: untitled-ontology-2:gaga (untitled-ontology-2:gaga)
+
+ClassAssertion(untitled-ontology-2:Village untitled-ontology-2:gaga)
+
+# Individual: untitled-ontology-2:goblin (untitled-ontology-2:goblin)
+
+ClassAssertion(untitled-ontology-2:Race untitled-ontology-2:goblin)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:goblin untitled-ontology-2:dwarf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:goblin untitled-ontology-2:elf)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:goblin untitled-ontology-2:human)
+
+# Individual: untitled-ontology-2:human (untitled-ontology-2:human)
+
+ClassAssertion(untitled-ontology-2:Race untitled-ontology-2:human)
+ObjectPropertyAssertion(untitled-ontology-2:hostileRace untitled-ontology-2:human untitled-ontology-2:goblin)
+
+# Individual: untitled-ontology-2:illidan (untitled-ontology-2:illidan)
+
+ClassAssertion(untitled-ontology-2:Character untitled-ontology-2:illidan)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:illidan untitled-ontology-2:gaga)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:illidan untitled-ontology-2:elf)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:illidan untitled-ontology-2:mage)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:illidan "1000"^^xsd:integer)
+
+# Individual: untitled-ontology-2:ivan (untitled-ontology-2:ivan)
+
+ClassAssertion(untitled-ontology-2:Player untitled-ontology-2:ivan)
+ObjectPropertyAssertion(untitled-ontology-2:playing untitled-ontology-2:ivan untitled-ontology-2:torvald)
+
+# Individual: untitled-ontology-2:mage (untitled-ontology-2:mage)
+
+ClassAssertion(untitled-ontology-2:MagicClass untitled-ontology-2:mage)
+
+# Individual: untitled-ontology-2:oleg (untitled-ontology-2:oleg)
+
+ClassAssertion(untitled-ontology-2:Player untitled-ontology-2:oleg)
+ObjectPropertyAssertion(untitled-ontology-2:playing untitled-ontology-2:oleg untitled-ontology-2:shmig)
+
+# Individual: untitled-ontology-2:rora (untitled-ontology-2:rora)
+
+ClassAssertion(untitled-ontology-2:Village untitled-ontology-2:rora)
+
+# Individual: untitled-ontology-2:rouge (untitled-ontology-2:rouge)
+
+ClassAssertion(untitled-ontology-2:Class untitled-ontology-2:rouge)
+
+# Individual: untitled-ontology-2:senshi (untitled-ontology-2:senshi)
+
+ClassAssertion(untitled-ontology-2:Character untitled-ontology-2:senshi)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:senshi untitled-ontology-2:ada)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:senshi untitled-ontology-2:dwarf)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:senshi untitled-ontology-2:warrior)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:senshi "1830"^^xsd:integer)
+
+# Individual: untitled-ontology-2:shmig (untitled-ontology-2:shmig)
+
+ClassAssertion(untitled-ontology-2:Character untitled-ontology-2:shmig)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:shmig untitled-ontology-2:ada)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:shmig untitled-ontology-2:goblin)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:shmig untitled-ontology-2:rouge)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:shmig "1828"^^xsd:integer)
+
+# Individual: untitled-ontology-2:torvald (untitled-ontology-2:torvald)
+
+ClassAssertion(untitled-ontology-2:Character untitled-ontology-2:torvald)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:torvald untitled-ontology-2:ada)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:torvald untitled-ontology-2:human)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:torvald untitled-ontology-2:bard)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:torvald "1899"^^xsd:integer)
+
+# Individual: untitled-ontology-2:vanya (untitled-ontology-2:vanya)
+
+ClassAssertion(untitled-ontology-2:Player untitled-ontology-2:vanya)
+ObjectPropertyAssertion(untitled-ontology-2:playing untitled-ontology-2:vanya untitled-ontology-2:senshi)
+
+# Individual: untitled-ontology-2:vuga (untitled-ontology-2:vuga)
+
+ClassAssertion(untitled-ontology-2:Enemy untitled-ontology-2:vuga)
+ObjectPropertyAssertion(untitled-ontology-2:birthPlace untitled-ontology-2:vuga untitled-ontology-2:rora)
+ObjectPropertyAssertion(untitled-ontology-2:bornRace untitled-ontology-2:vuga untitled-ontology-2:goblin)
+ObjectPropertyAssertion(untitled-ontology-2:hasClass untitled-ontology-2:vuga untitled-ontology-2:mage)
+DataPropertyAssertion(untitled-ontology-2:birthYear untitled-ontology-2:vuga "1850"^^xsd:integer)
+
+# Individual: untitled-ontology-2:warrior (untitled-ontology-2:warrior)
+
+ClassAssertion(untitled-ontology-2:Class untitled-ontology-2:warrior)
+
+
+)
