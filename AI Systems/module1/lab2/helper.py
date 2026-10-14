@@ -235,7 +235,6 @@ def detect_intent(message):
 
     for phrase, intent in phrases:
         if phrase in text:
-            print("intent", intent)
             return intent
 
     return None
@@ -866,7 +865,7 @@ def show_help():
     for intent, phrases in INTENTS.items():
         print(f"  [{intent.upper().replace('_', ' ')}]")
         for phrase in phrases:
-            print(f"    • {phrase.capitalize()}?")
+            print(f"    - {phrase.capitalize()}?")
         print()
 
     print(f"""
