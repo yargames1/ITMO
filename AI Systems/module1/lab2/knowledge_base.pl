@@ -1,0 +1,167 @@
+% Ассистент в ведении партий нри
+% Игроки
+player(ivan).
+player(oleg).
+player(artem).
+player(vanya).
+
+% Персонажи
+char(torvald).
+char(illidan).
+char(shmig).
+char(senshi).
+% злодеи
+enemy(buga).
+enemy(vuga).
+
+% Привязки персонажей к игрокам
+playing(ivan, torvald).
+playing(oleg, shmig).
+playing(artem, illidan).
+playing(vanya, senshi).
+
+
+% Классы
+class(rogue).
+class(bard).
+class(mage).
+class(warrior).
+% Магические классы
+magical_class(mage).
+magical_class(bard).
+
+% Разделение по классам
+char_info(torvald, bard).
+char_info(shmig, rogue).
+char_info(illidan, mage).
+char_info(senshi, warrior).
+char_info(buga, warrior).
+char_info(vuga, mage).
+
+
+%Рассы
+race(human).
+race(elf).
+race(goblin).
+race(dwarf).
+% Враждебность расс
+hostile_race(goblin, dwarf).  hostile_race(dwarf, goblin).
+hostile_race(goblin, human).  hostile_race(human, goblin).
+hostile_race(elf, dwarf).     hostile_race(dwarf, elf).
+
+% Принадлежность к рассе
+born_race(torvald, human).
+born_race(shmig, goblin).
+born_race(illidan, elf).
+born_race(senshi, dwarf).
+born_race(buga, goblin).
+born_race(vuga, goblin).
+
+% Места
+village(ada).
+village(gaga).
+village(rora).
+
+% Инфа о рождении: год рождения, город
+birth_info(torvald, 1899, ada).
+birth_info(shmig, 1828, ada).
+birth_info(illidan, 1000, gaga).
+birth_info(senshi, 1830, ada).
+birth_info(buga, 1840, rora).
+birth_info(vuga, 1850, rora).
+
+
+% Правила
+
+% Проверка на знание истории о городе, если родились в нем
+knows_history(Char, Village) :-
+    char(Char),
+    birth_info(Char, _, Village).
+
+% Если персонаж обладает магией, он может вдохновить
+can_inspire(Char) :-
+    char_info(Char, Class),
+    magical_class(Class).
+
+% Персонажи будут конфликтовать, если враждебной рассы друг к другу или
+% враги
+will_conflict(Char1, Char2) :-
+    (   char(Char1); enemy(Char1)),
+    (   char(Char2); enemy(Char2)),
+    Char1 \= Char2,
+    born_race(Char1, Race1),
+    born_race(Char2, Race2),
+    ( hostile_race(Race1, Race2);
+    (   enemy(Char1), playing(_, Char2));
+    (   enemy(Char2),  playing(_, Char1))
+    ).
+
+% Воин может танковать
+can_tank(Char) :-
+    char_info(Char, warrior).
+
+% Персонаж может эмоцианально подавить другого, если разница в возрасте
+% больше на 20 лет
+can_suppressed(Char1, Char2) :-
+    (   char(Char1); enemy(Char1)),
+    (   char(Char2); enemy(Char2)),
+    Char1 \= Char2,
+    birth_info(Char1, Year1, _),
+    birth_info(Char2, Year2, _),
+    Difference is Year2 - Year1,
+    Difference > 20.
+
+% Напряжение между игроками есть, если их персонажи конфликтуют
+party_tension(Player1, Player2) :-
+    playing(Player1, Char1),
+    playing(Player2, Char2),
+    Player1 \= Player2,
+    will_conflict(Char1, Char2).
+
+% Сколько лет персонажу сейчас
+age(Char, Age, Now) :-
+    birth_info(Char, Year, _),
+    Age is Now - Year.
+
+
+% Простые вопросы
+% player(ivan).
+% char(torvald).
+
+% И
+% playing(P, C), char_info(C, mage).
+
+% Или
+% can_tank(C) ; can_inspire(C).
+
+% Не
+% can_suppressed(C1, C2), \+ will_conflict(C1, C2)
+
+% требуют выполнения правила
+% will_conflict(torvald, Who).
+% party_tension(P1, P2).
+% age(illidan, Age, 2024).
+% can_suppressed(shmig, torvald).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
